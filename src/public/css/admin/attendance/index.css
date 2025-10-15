@@ -1,0 +1,162 @@
+/* 管理者用勤怠一覧ページのスタイル */
+
+/* ヘッダーナビゲーション */
+.index__nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.index__nav-link {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.index__nav-link:hover {
+    opacity: 0.8;
+}
+
+.index__nav-form {
+    margin: 0;
+}
+
+.index__nav-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    transition: opacity 0.3s;
+}
+
+.index__nav-button:hover {
+    opacity: 0.8;
+}
+
+/* メインコンテンツ */
+.index {
+    min-height: calc(100vh - 60px);
+    background-color: #e8e8e8;
+    padding: 40px 20px;
+}
+
+.index__container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* タイトル */
+.index__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 30px;
+    padding-left: 16px;
+    border-left: 4px solid #000000;
+}
+
+/* 日付ナビゲーション */
+.index__date-nav {
+    background-color: #ffffff;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.index__date-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666666;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.index__date-link:hover {
+    color: #333333;
+}
+
+.index__date-arrow {
+    font-size: 14px;
+}
+
+.index__date-text {
+    font-size: 14px;
+}
+
+.index__date-current {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.index__date-icon {
+    font-size: 18px;
+}
+
+.index__date-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+}
+
+/* テーブルラッパー */
+.index__table-wrapper {
+    background-color: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* テーブル */
+.index__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.index__table-head {
+    background-color: #f5f5f5;
+}
+
+.index__table-row {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.index__table-row:last-child {
+    border-bottom: none;
+}
+
+.index__table-header {
+    padding: 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+}
+
+.index__table-cell {
+    padding: 16px;
+    text-align: center;
+    font-size: 14px;
+    color: #333333;
+}
+
+/* 詳細リンク */
+.index__detail-link {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.index__detail-link:hover {
+    opacity: 0.7;
+}

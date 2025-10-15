@@ -1,0 +1,106 @@
+.verify-email__container {
+    text-align: center;
+    margin: 240px auto 0;
+    padding: 0 20px;
+}
+
+.verify-email__message {
+    margin-bottom: 60px;
+}
+
+.verify-email__text {
+    font-size: 24px;
+}
+
+.verify-email__actions {
+    text-align: center;
+}
+
+.verify-email__button {
+    background-color: #d9d9d9;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 20px 32px;
+    font-size: 24px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 60px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.verify-email__button:hover {
+    background-color: #9ca3af;
+    color: #374151;
+}
+
+.verify-email__form {
+    margin: 0;
+}
+
+.verify-email__link {
+    color: #0073cc;
+    text-decoration: none;
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-weight: normal;
+}
+
+.verify-email__link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+.verify-email__success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+    text-align: center;
+}
+
+/* タブレット用スタイル (768px-850px) */
+@media screen and (max-width: 850px) {
+    .verify-email__container {
+        margin: 180px auto 0;
+        max-width: 600px;
+    }
+
+    .verify-email__message {
+        margin-bottom: 50px;
+    }
+
+    .verify-email__text {
+        font-size: 18px;
+        line-height: 1.6;
+        padding: 0 10px;
+    }
+
+    .verify-email__button {
+        padding: 12px 20px;
+        font-size: 18px;
+        margin-bottom: 40px;
+        border-radius: 8px;
+        max-width: 300px;
+    }
+
+    .verify-email__link {
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .verify-email__success-message {
+        font-size: 15px;
+        padding: 12px;
+        margin-bottom: 15px;
+        max-width: 500px;
+    }
+}

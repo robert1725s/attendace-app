@@ -1,0 +1,180 @@
+/* 管理者用勤怠詳細ページのスタイル */
+
+/* ヘッダーナビゲーション */
+.detail__nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.detail__nav-link {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.detail__nav-link:hover {
+    opacity: 0.8;
+}
+
+.detail__nav-form {
+    margin: 0;
+}
+
+.detail__nav-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    transition: opacity 0.3s;
+}
+
+.detail__nav-button:hover {
+    opacity: 0.8;
+}
+
+/* メインコンテンツ */
+.detail {
+    min-height: calc(100vh - 60px);
+    background-color: #e8e8e8;
+    padding: 40px 20px;
+}
+
+.detail__container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* タイトル */
+.detail__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 30px;
+    padding-left: 16px;
+    border-left: 4px solid #000000;
+}
+
+/* 詳細カード */
+.detail__card {
+    background-color: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+/* 行 */
+.detail__row {
+    display: flex;
+    padding: 24px 32px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.detail__row:last-child {
+    border-bottom: none;
+}
+
+.detail__row--note {
+    align-items: flex-start;
+}
+
+/* ラベル */
+.detail__label {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #666666;
+    flex-shrink: 0;
+}
+
+/* 値 */
+.detail__value {
+    flex: 1;
+    font-size: 16px;
+    color: #333333;
+}
+
+/* 日付 */
+.detail__date-year {
+    margin-right: 40px;
+}
+
+.detail__date-detail {
+    margin-left: 40px;
+}
+
+/* 時刻範囲 */
+.detail__time-range {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* 時刻ボックス */
+.detail__time-box {
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333333;
+}
+
+.detail__time-box--empty {
+    background-color: #ffffff;
+}
+
+/* 時刻セパレーター */
+.detail__time-separator {
+    font-size: 16px;
+    color: #333333;
+}
+
+/* 備考ボックス */
+.detail__note-box {
+    width: 100%;
+    max-width: 500px;
+    min-height: 80px;
+    padding: 12px 16px;
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333333;
+    line-height: 1.6;
+}
+
+/* ボタンラッパー */
+.detail__button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 修正ボタン */
+.detail__button {
+    display: inline-block;
+    width: 120px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.detail__button:hover {
+    background-color: #333333;
+}
