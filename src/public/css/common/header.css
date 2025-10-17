@@ -1,0 +1,70 @@
+/* ヘッダー全体スタイル */
+.header {
+    background-color: #000;
+}
+
+.header__container {
+    max-width: 1512px;
+    margin: 0 auto;
+    padding: 22px 25px 22px 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ヘッダーロゴスタイル */
+.header__logo{
+    width: 370px;
+    height: auto;
+}
+
+/* ヘッダーナビゲーションスタイル */
+.header__nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.header__nav-form {
+    margin: 0;
+}
+
+.header__nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+
+.header__nav-link:hover {
+    opacity: 0.7;
+}
+
+.header__nav-link--button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+}
+
+/* タブレット用（768px以下） */
+@media screen and (max-width: 850px) {
+    .header__container {
+        padding: 15px 20px;
+    }
+
+    .header__logo {
+        width: 250px;
+    }
+
+    .header__nav {
+        gap: 20px;
+    }
+
+    .header__nav-link {
+        font-size: 12px;
+    }
+}

@@ -1,45 +1,7 @@
-/* 勤怠管理ページのスタイル */
-
-/* ヘッダーナビゲーション */
-.clock__nav {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-.clock__nav-link {
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: opacity 0.3s;
-}
-
-.clock__nav-link:hover {
-    opacity: 0.8;
-}
-
-.clock__nav-form {
-    margin: 0;
-}
-
-.clock__nav-button {
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 0;
-    transition: opacity 0.3s;
-}
-
-.clock__nav-button:hover {
-    opacity: 0.8;
-}
+/* 勤怠打刻ページのスタイル */
 
 /* メインコンテンツ */
-.clock {
+.stamp {
     min-height: calc(100vh - 60px);
     background-color: #e8e8e8;
     display: flex;
@@ -48,14 +10,14 @@
     padding: 40px 20px;
 }
 
-.clock__container {
+.stamp__container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 /* ステータスバッジ */
-.clock__status {
+.stamp__status {
     background-color: #c4c4c4;
     color: #333333;
     font-size: 16px;
@@ -66,7 +28,7 @@
 }
 
 /* 日付表示 */
-.clock__date {
+.stamp__date {
     font-size: 28px;
     font-weight: 700;
     color: #333333;
@@ -74,7 +36,7 @@
 }
 
 /* 時刻表示 */
-.clock__time {
+.stamp__time {
     font-size: 96px;
     font-weight: 700;
     color: #000000;
@@ -83,14 +45,14 @@
 }
 
 /* フォーム */
-.clock__form {
+.stamp__form {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
 /* 出勤ボタン */
-.clock__button {
+.stamp__button {
     width: 200px;
     height: 60px;
     background-color: #000000;
@@ -103,6 +65,6 @@
     transition: background-color 0.3s;
 }
 
-.clock__button:hover {
+.stamp__button:hover {
     background-color: #333333;
 }
