@@ -2,14 +2,15 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Tests\Feature\Traits\TestHelpers;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
     use RefreshDatabase;
+    use TestHelpers;
 
     /**
      * メールアドレスが未入力の場合、バリデーションメッセージが表示される
@@ -17,10 +18,7 @@ class LoginTest extends TestCase
     public function test_email_is_required()
     {
         // 1. ユーザーを登録する
-        User::factory()->create([
-            'email' => 'test@example.com',
-            'password' => Hash::make('password123'),
-        ]);
+        $this->createVerifiedUser();
 
         // 2. メールアドレス以外のユーザー情報を入力する
         // 3. ログインの処理を行う
@@ -41,10 +39,7 @@ class LoginTest extends TestCase
     public function test_password_is_required()
     {
         // 1. ユーザーを登録する
-        User::factory()->create([
-            'email' => 'test@example.com',
-            'password' => Hash::make('password123'),
-        ]);
+        $this->createVerifiedUser();
 
         // 2. パスワード以外のユーザー情報を入力する
         // 3. ログインの処理を行う
@@ -65,10 +60,7 @@ class LoginTest extends TestCase
     public function test_unregistered_email_shows_error()
     {
         // 1. ユーザーを登録する
-        User::factory()->create([
-            'email' => 'test@example.com',
-            'password' => Hash::make('password123'),
-        ]);
+        $this->createVerifiedUser();
 
         // 2. 誤ったメールアドレスのユーザー情報を入力する
         // 3. ログインの処理を行う

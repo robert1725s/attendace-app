@@ -6,10 +6,8 @@
 
 .verify-email__message {
     margin-bottom: 60px;
-}
-
-.verify-email__text {
     font-size: 24px;
+    font-weight: bold;
 }
 
 .verify-email__actions {
@@ -26,8 +24,10 @@
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
-    margin-bottom: 60px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-bottom: 75px;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
 }
 
 .verify-email__button:hover {
@@ -47,7 +47,6 @@
     border: none;
     cursor: pointer;
     transition: color 0.3s ease;
-    font-weight: normal;
 }
 
 .verify-email__link:hover {
@@ -75,13 +74,10 @@
     }
 
     .verify-email__message {
-        margin-bottom: 50px;
-    }
-
-    .verify-email__text {
         font-size: 18px;
         line-height: 1.6;
         padding: 0 10px;
+        margin-bottom: 50px;
     }
 
     .verify-email__button {

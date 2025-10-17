@@ -13,17 +13,14 @@
     <div class="verify-email__container">
 
         <!-- メッセージ -->
-        <div class="verify-email__message">
-            <p class="verify-email__text">
-                登録していただいたメールアドレスに認証メールを送付しました。<br>
-                メール認証を完了してください。
-            </p>
-        </div>
-
+        <p class="verify-email__message">
+            登録していただいたメールアドレスに認証メールを送付しました。<br>
+            メール認証を完了してください。
+        </p>
 
         <div class="verify-email__actions">
             <!-- Mailhogへのリンク -->
-            <a href="{{ config('services.mailhog.url') }}" class="verify-email__button">認証はこちらから</a>
+            <a href="http://localhost:8025/" class="verify-email__button">認証はこちらから</a>
             <form method="POST" action="{{ route('verification.send') }}" class="verify-email__form">
                 @csrf
                 <!-- 再送ボタン -->
