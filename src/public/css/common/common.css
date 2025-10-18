@@ -4,6 +4,10 @@
 /* body共通 */
 body {
     font-family: "Inter", sans-serif;
-    background-color: #fff;
     color: #000;
+}
+
+/* 認証後のページ背景色（verify_emailページ以外） */
+.with-bg {
+    background-color: #e8e8e8;
 }

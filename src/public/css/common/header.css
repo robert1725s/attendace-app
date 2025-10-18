@@ -6,7 +6,7 @@
 .header__container {
     max-width: 1512px;
     margin: 0 auto;
-    padding: 22px 25px 22px 45px;
+    padding: 22px 35px 22px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,15 +25,11 @@
     align-items: center;
 }
 
-.header__nav-form {
-    margin: 0;
-}
-
 .header__nav-link {
     color: #ffffff;
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 24px;
+    font-weight: bold;
     transition: opacity 0.3s;
     white-space: nowrap;
 }
@@ -53,18 +49,14 @@
 /* タブレット用（768px以下） */
 @media screen and (max-width: 850px) {
     .header__container {
-        padding: 15px 20px;
+        padding: 20px 20px;
     }
 
     .header__logo {
         width: 250px;
     }
 
-    .header__nav {
-        gap: 20px;
-    }
-
     .header__nav-link {
-        font-size: 12px;
+        font-size: 18px;
     }
 }

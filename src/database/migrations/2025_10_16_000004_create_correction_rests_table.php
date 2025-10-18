@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCorrectionBreaksTable extends Migration
+class CreateCorrectionRestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCorrectionBreaksTable extends Migration
      */
     public function up()
     {
-        Schema::create('correction_breaks', function (Blueprint $table) {
+        Schema::create('correction_rests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('correction_attendance_id')->constrained('correction_attendances')->cascadeOnDelete();
             $table->time('start_time')->nullable();
@@ -29,6 +29,6 @@ class CreateCorrectionBreaksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('correction_breaks');
+        Schema::dropIfExists('correction_rests');
     }
 }

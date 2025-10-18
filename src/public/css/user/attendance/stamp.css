@@ -1,70 +1,118 @@
 /* 勤怠打刻ページのスタイル */
 
 /* メインコンテンツ */
-.stamp {
-    min-height: calc(100vh - 60px);
-    background-color: #e8e8e8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-}
-
 .stamp__container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 50px 20px;
+    margin-top: 150px;
+    text-align: center;
 }
 
 /* ステータスバッジ */
 .stamp__status {
-    background-color: #c4c4c4;
-    color: #333333;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 8px 24px;
-    border-radius: 20px;
-    margin-bottom: 40px;
+    width: 100px;
+    background-color: #c8c8c8;
+    color: #696969;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 50px;
+    margin-bottom: 32px;
 }
 
 /* 日付表示 */
 .stamp__date {
-    font-size: 28px;
-    font-weight: 700;
-    color: #333333;
-    margin-bottom: 30px;
+    font-size: 40px;
+    margin-bottom: 32px;
 }
 
 /* 時刻表示 */
 .stamp__time {
-    font-size: 96px;
-    font-weight: 700;
-    color: #000000;
-    letter-spacing: 0.05em;
-    margin-bottom: 60px;
+    font-size: 80px;
+    font-weight: bold;
+    margin-bottom: 85px;
 }
 
-/* フォーム */
-.stamp__form {
-    width: 100%;
+/* 退勤済メッセージ */
+.stamp__message {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.15em;
+}
+
+/* ボタンコンテナ */
+.stamp__buttons {
     display: flex;
-    justify-content: center;
+    gap: 80px;
 }
 
-/* 出勤ボタン */
+/* 勤怠ボタン */
 .stamp__button {
-    width: 200px;
-    height: 60px;
+    width: 220px;
+    height: 77px;
     background-color: #000000;
     color: #ffffff;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 0.15em;
     border: none;
-    border-radius: 8px;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .stamp__button:hover {
     background-color: #333333;
+}
+
+/* 休憩ボタン */
+.stamp__button--rest {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.stamp__button--rest:hover {
+    background-color: #f5f5f5;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 850px) {
+    .stamp__container {
+        padding: 30px 15px;
+        margin-top: 100px;
+    }
+
+    .stamp__status {
+        font-size: 16px;
+        padding: 8px 16px;
+        margin-bottom: 24px;
+    }
+
+    .stamp__date {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+
+    .stamp__time {
+        font-size: 56px;
+        margin-bottom: 60px;
+    }
+
+    .stamp__message {
+        font-size: 20px;
+    }
+
+    .stamp__buttons {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .stamp__button {
+        width: 180px;
+        height: 64px;
+        font-size: 24px;
+    }
 }

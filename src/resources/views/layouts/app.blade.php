@@ -12,7 +12,7 @@
     @yield('css')
 </head>
 
-<body>
+<body @auth @if(!request()->is('verify_email')) class="with-bg" @endif @endauth>
     @include('components.header')
 
     <main>

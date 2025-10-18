@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware("auth")->group(function () {
-    // メール認証関連のルート
+    // メール認証
     Route::get("/verify_email", function () {
         return view("auth.verify_email");
     });
 
-    Route::get("/attendance", function () {
-        return view("user.attendance.stamp");
-    });
+    // 勤怠登録機能
+    Route::get("/attendance", [StaffController::class, 'index']);
+    Route::post("/attendance/stamp", [StaffController::class, 'stamp']);
+    Route::post("/attendance/rest", [StaffController::class, 'rest']);
 
     Route::get("/attendance/list", function () {
         return view("user.attendance.index");

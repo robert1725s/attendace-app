@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Traits;
 
+use App\Models\Attendance;
+use App\Models\Rest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -59,6 +61,63 @@ trait TestHelpers
     {
         $user = $this->createAdminUser($attributes);
         $this->actingAs($user);
+        return $user;
+    }
+
+    /**
+     * 出勤中のユーザーを作成
+     */
+    protected function createWorkingUser(array $attributes = []): User
+    {
+        $user = $this->createVerifiedUser($attributes);
+
+        Attendance::create([
+            'user_id' => $user->id,
+            'work_date' => now()->format('Y-m-d'),
+            'start_time' => now()->setTime(9, 0, 0),
+            'end_time' => null,
+        ]);
+
+        return $user;
+    }
+
+    /**
+     * 休憩中のユーザーを作成
+     */
+    protected function createOnRestUser(array $attributes = []): User
+    {
+        $user = $this->createVerifiedUser($attributes);
+
+        $attendance = Attendance::create([
+            'user_id' => $user->id,
+            'work_date' => now()->format('Y-m-d'),
+            'start_time' => now()->setTime(9, 0, 0),
+            'end_time' => null,
+        ]);
+
+        Rest::create([
+            'attendance_id' => $attendance->id,
+            'start_time' => now()->setTime(12, 0, 0),
+            'end_time' => null,
+        ]);
+
+        return $user;
+    }
+
+    /**
+     * 退勤済のユーザーを作成
+     */
+    protected function createFinishedWorkUser(array $attributes = []): User
+    {
+        $user = $this->createVerifiedUser($attributes);
+
+        Attendance::create([
+            'user_id' => $user->id,
+            'work_date' => now()->format('Y-m-d'),
+            'start_time' => now()->setTime(9, 0, 0),
+            'end_time' => now()->setTime(18, 0, 0),
+        ]);
+
         return $user;
     }
 }
