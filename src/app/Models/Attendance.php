@@ -55,4 +55,40 @@ class Attendance extends Model
 
         return '出勤中';
     }
+
+    /**
+     * 休憩時間の合計を取得（分）
+     */
+    public function getTotalRestMinutesAttribute()
+    {
+        return $this->rests()
+            ->whereNotNull('end_time')
+            ->get()
+            ->sum(function ($rest) {
+                return $rest->start_time->diffInMinutes($rest->end_time);
+            });
+    }
+
+    /**
+     * 勤務時間の合計を取得（分）
+     */
+    public function getTotalWorkMinutesAttribute()
+    {
+        if (!$this->end_time) {
+            return 0;
+        }
+
+        $totalMinutes = $this->start_time->diffInMinutes($this->end_time);
+        return $totalMinutes - $this->total_rest_minutes;
+    }
+
+    /**
+     * 時間を「H:MM」形式で表示
+     */
+    public static function formatMinutesToTime($minutes)
+    {
+        $hours = floor($minutes / 60);
+        $mins = $minutes % 60;
+        return sprintf('%d:%02d', $hours, $mins);
+    }
 }

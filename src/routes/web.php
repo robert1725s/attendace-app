@@ -20,24 +20,20 @@ Route::middleware("auth")->group(function () {
         return view("auth.verify_email");
     });
 
-    // 勤怠登録機能
-    Route::get("/attendance", [StaffController::class, 'index']);
+    // 勤怠登録画面
+    Route::get("/attendance", [StaffController::class, 'showAttendance']);
     Route::post("/attendance/stamp", [StaffController::class, 'stamp']);
     Route::post("/attendance/rest", [StaffController::class, 'rest']);
 
-    Route::get("/attendance/list", function () {
-        return view("user.attendance.index");
-    });
+    // 勤怠一覧画面
+    Route::get("/attendance/list", [StaffController::class, 'showList']);
 
-    Route::get("/attendance/detail", function () {
-        return view("user.attendance.detail");
-    });
-
+    Route::get("/attendance/detail/{id}", [StaffController::class, 'showDetail']);
     Route::get("/admin/attendances/list", function () {
         return view("admin.attendance.index");
     });
 
-    Route::get("/admin/attendances/", function () {
+    Route::get("/admin/attendance/", function () {
         return view("admin.attendance.detail");
     });
 

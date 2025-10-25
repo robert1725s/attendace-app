@@ -114,4 +114,29 @@ class RestTest extends TestCase
         $response = $this->get('/attendance');
         $response->assertSee('休憩戻', false);
     }
+
+    /**
+     * 休憩時刻が勤怠一覧画面で確認できる
+     * 1. ステータスが勤務中のユーザーにログインする
+     * 2. 休憩入と休憩戻の処理を行う
+     * 3. 勤怠一覧画面から休憩の日付を確認する
+     * 勤怠一覧画面に休憩時刻が正確に記録されている
+     */
+    public function test_rest_time_is_displayed_on_list_page()
+    {
+        // 1. ステータスが勤務中のユーザーにログインする
+        $user = $this->createWorkingUser();
+        $this->actingAs($user);
+
+        // 2. 休憩入と休憩戻の処理を行う
+        $this->post('/attendance/rest'); // 休憩入
+        sleep(1); // 1秒待機して時間差を作る
+        $this->post('/attendance/rest'); // 休憩戻
+
+        // 3. 勤怠一覧画面から休憩の日付を確認する
+        $response = $this->get('/attendance/list');
+
+        // 勤怠一覧画面に休憩時刻が正確に記録されている（休憩時間が表示される）
+        $response->assertSee('0:00', false); // 1秒程度の休憩時間
+    }
 }

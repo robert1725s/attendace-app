@@ -55,4 +55,29 @@ class ClockInTest extends TestCase
         $response = $this->get('/attendance');
         $response->assertDontSee('出勤', false);
     }
+
+    /**
+     * 出勤時刻が勤怠一覧画面で確認できる
+     * 1. ステータスが勤務外のユーザーにログインする
+     * 2. 出勤の処理を行う
+     * 3. 勤怠一覧画面から出勤の日付を確認する
+     * 勤怠一覧画面に出勤時刻が正確に記録されている
+     */
+    public function test_clock_in_time_is_displayed_on_list_page()
+    {
+        // 1. ステータスが勤務外のユーザーにログインする
+        $user = $this->createVerifiedUser();
+        $this->actingAs($user);
+
+        // 2. 出勤の処理を行う
+        $clockInTime = now();
+        $this->post('/attendance/stamp');
+
+        // 3. 勤怠一覧画面から出勤の日付を確認する
+        $response = $this->get('/attendance/list');
+
+        // 出勤時刻が正確に記録されている
+        $expectedTime = $clockInTime->format('H:i');
+        $response->assertSee($expectedTime, false);
+    }
 }

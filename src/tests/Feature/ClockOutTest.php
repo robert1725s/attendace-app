@@ -38,4 +38,30 @@ class ClockOutTest extends TestCase
         $response = $this->get('/attendance');
         $response->assertSee('退勤済', false);
     }
+
+    /**
+     * 退勤時刻が勤怠一覧画面で確認できる
+     * 1. ステータスが勤務外のユーザーにログインする
+     * 2. 出勤と退勤の処理を行う
+     * 3. 勤怠一覧画面から退勤の日付を確認する
+     * 勤怠一覧画面に退勤時刻が正確に記録されている
+     */
+    public function test_clock_out_time_is_displayed_on_list_page()
+    {
+        // 1. ステータスが勤務外のユーザーにログインする
+        $user = $this->createVerifiedUser();
+        $this->actingAs($user);
+
+        // 2. 出勤と退勤の処理を行う
+        $this->post('/attendance/stamp'); // 出勤
+        $clockOutTime = now();
+        $this->post('/attendance/stamp'); // 退勤
+
+        // 3. 勤怠一覧画面から退勤の日付を確認する
+        $response = $this->get('/attendance/list');
+
+        // 勤怠一覧画面に退勤時刻が正確に記録されている
+        $expectedTime = $clockOutTime->format('H:i');
+        $response->assertSee($expectedTime, false);
+    }
 }
