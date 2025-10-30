@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CorrectionController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::middleware("auth")->group(function () {
 
     // 勤怠登録画面
     Route::get("/attendance", [StaffController::class, 'showAttendance']);
+
+    //勤怠処理
     Route::post("/attendance/stamp", [StaffController::class, 'stamp']);
     Route::post("/attendance/rest", [StaffController::class, 'rest']);
 
@@ -30,6 +33,8 @@ Route::middleware("auth")->group(function () {
 
     // 勤怠詳細画面
     Route::get("/attendance/detail/{id}", [StaffController::class, 'showDetail']);
+
+    //勤怠修正申請
     Route::post("/admin/attendance/modify/{id}", [StaffController::class, 'modify']);
 
     Route::get("/admin/attendances/list", function () {
@@ -48,7 +53,8 @@ Route::middleware("auth")->group(function () {
         return view("admin.staff.attendance");
     });
 
-    Route::get("/stamp_correction_request/list", [StaffController::class, 'showCorrection']);
+    // 申請一覧画面
+    Route::get("/stamp_correction_request/list", [CorrectionController::class, 'showCorrection']);
 
     Route::get("/stamp_correction_request/approve", function () {
         return view("correction.approve");
