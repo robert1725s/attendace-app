@@ -22,8 +22,7 @@ class GetStaffAttendanceListTest extends TestCase
     public function test_all_user_attendance_records_are_displayed()
     {
         // 1. 勤怠情報が登録されたユーザーにログインする
-        $user = $this->createVerifiedUser();
-        $this->actingAs($user);
+        $user = $this->loginAsUser();
 
         // 今月の勤怠データを作成
         $today = now();
@@ -60,8 +59,7 @@ class GetStaffAttendanceListTest extends TestCase
     public function test_current_month_is_displayed_on_list_page()
     {
         // 1. ユーザーにログインをする
-        $user = $this->createVerifiedUser();
-        $this->actingAs($user);
+        $user = $this->loginAsUser();
 
         // 2. 勤怠一覧ページを開く
         $response = $this->get('/attendance/list');
@@ -81,8 +79,7 @@ class GetStaffAttendanceListTest extends TestCase
     public function test_previous_month_is_displayed_when_clicking_prev_button()
     {
         // 1. 勤怠情報が登録されたユーザーにログインをする
-        $user = $this->createVerifiedUser();
-        $this->actingAs($user);
+        $user = $this->loginAsUser();
 
         // 前月の勤怠データを作成
         $prevMonthDate = now()->subMonth()->startOfMonth()->addDays(10);
@@ -98,7 +95,8 @@ class GetStaffAttendanceListTest extends TestCase
 
         // 3. 「前月」ボタンを押す
         $prevMonth = now()->subMonth()->format('Y-m');
-        $response = $this->get('/attendance/list?month=' . $prevMonth);
+        $response = $this->from('/attendance/list')
+            ->get('/attendance/list?month=' . $prevMonth);
 
         // 前月の情報が表示されている
         $expectedMonth = now()->subMonth()->format('Y/m');
@@ -117,8 +115,7 @@ class GetStaffAttendanceListTest extends TestCase
     public function test_next_month_is_displayed_when_clicking_next_button()
     {
         // 1. 勤怠情報が登録されたユーザーにログインをする
-        $user = $this->createVerifiedUser();
-        $this->actingAs($user);
+        $user = $this->loginAsUser();
 
         // 翌月の勤怠データを作成
         $nextMonthDate = now()->addMonth()->startOfMonth()->addDays(5);
@@ -134,12 +131,47 @@ class GetStaffAttendanceListTest extends TestCase
 
         // 3. 「翌月」ボタンを押す
         $nextMonth = now()->addMonth()->format('Y-m');
-        $response = $this->get('/attendance/list?month=' . $nextMonth);
+        $response = $this->from('/attendance/list')
+            ->get('/attendance/list?month=' . $nextMonth);
 
         // 翌月の情報が表示されている
         $expectedMonth = now()->addMonth()->format('Y/m');
         $response->assertSee($expectedMonth, false);
         $response->assertSee('08:00', false);
         $response->assertSee('17:00', false);
+    }
+
+    /**
+     * 「詳細」を押下すると、その日の勤怠詳細画面に遷移する
+     * 1. 勤怠情報が登録されたユーザーにログインをする
+     * 2. 勤怠一覧ページを開く
+     * 3. 「詳細」ボタンを押下する
+     * その日の勤怠詳細画面に遷移する
+     */
+    public function test_detail_button_redirects_to_attendance_detail_page()
+    {
+        // 1. 勤怠情報が登録されたユーザーにログインをする
+        $user = $this->loginAsUser();
+
+        // 勤怠データを作成
+        $today = now();
+        $attendance = Attendance::create([
+            'user_id' => $user->id,
+            'work_date' => $today->format('Y-m-d'),
+            'start_time' => $today->copy()->setTime(9, 0, 0),
+            'end_time' => $today->copy()->setTime(18, 0, 0),
+        ]);
+
+        // 2. 勤怠一覧ページを開く
+        $response = $this->get('/attendance/list');
+
+        // 3. 「詳細」ボタンを押下する
+        $response = $this->from('/attendance/list')
+            ->get('/attendance/detail/' . $attendance->id);
+
+        // その日の勤怠詳細画面に遷移する
+        $response->assertSee('勤怠詳細', false);
+        $response->assertSee($user->name, false);
+        $response->assertSee($today->format('n月j日'), false);
     }
 }

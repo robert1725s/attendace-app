@@ -28,7 +28,10 @@ Route::middleware("auth")->group(function () {
     // 勤怠一覧画面
     Route::get("/attendance/list", [StaffController::class, 'showList']);
 
+    // 勤怠詳細画面
     Route::get("/attendance/detail/{id}", [StaffController::class, 'showDetail']);
+    Route::post("/admin/attendance/modify/{id}", [StaffController::class, 'modify']);
+
     Route::get("/admin/attendances/list", function () {
         return view("admin.attendance.index");
     });
@@ -45,9 +48,7 @@ Route::middleware("auth")->group(function () {
         return view("admin.staff.attendance");
     });
 
-    Route::get("/stamp_correction_request/list", function () {
-        return view("correction.index");
-    });
+    Route::get("/stamp_correction_request/list", [StaffController::class, 'showCorrection']);
 
     Route::get("/stamp_correction_request/approve", function () {
         return view("correction.approve");

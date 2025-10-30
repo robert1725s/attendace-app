@@ -1,0 +1,164 @@
+/* 申請一覧ページのスタイル */
+
+.index__container {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* タイトル */
+.index__title {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 80px 0 65px;
+    padding-left: 20px;
+    border-left: 8px solid #000000;
+}
+
+/* タブナビゲーション */
+.index__tabs {
+    display: flex;
+    gap: 100px;
+    padding-bottom: 17px;
+    border-bottom: 1px solid #000000;
+    margin-bottom: 45px;
+}
+
+.index__tab {
+    font-size: 16px;
+    letter-spacing: 0.15em;
+    color: #000;
+    text-decoration: none;
+}
+
+.index__tab:first-child {
+    padding-left: 55px;
+}
+
+.index__tab:hover {
+    opacity: 0.7;
+}
+
+.index__tab--active {
+    font-weight: bold;
+}
+
+/* テーブルラッパー */
+.index__table-wrapper {
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding-bottom: 3px;
+    margin-bottom: 80px;
+}
+
+/* テーブル */
+.index__table {
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: 0.15em;
+    font-weight: bold;
+    color: #737373;
+    border-collapse: collapse;
+}
+
+.index__table-head .index__table-row {
+    border-bottom: 3px solid #e1e1e1;
+}
+
+.index__table-row {
+    border-bottom: 2px solid #e1e1e1;
+}
+
+/* ヘッダー行 */
+.index__table-header {
+    padding: 14px 25px 14px 0;
+    text-align: left;
+    max-width: 180px;
+}
+
+.index__table-header:first-child {
+    padding-left: 55px;
+}
+
+.index__table-cell {
+    padding: 14px 25px 14px 0;
+    text-align: left;
+    max-width: 180px;
+}
+
+.index__table-cell:first-child {
+    padding-left: 35px;
+}
+
+.index__table-cell--empty {
+    text-align: center;
+    color: #737373
+}
+
+/* 詳細リンク */
+.index__detail-link {
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+.index__detail-link:hover {
+    opacity: 0.7;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 850px) {
+    .index__container {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .index__title {
+        font-size: 24px;
+        margin: 40px 0 30px;
+        padding-left: 15px;
+        border-left: 6px solid #000000;
+    }
+
+    .index__tabs {
+        gap: 40px;
+        padding-bottom: 12px;
+        margin-bottom: 30px;
+    }
+
+    .index__tab {
+        font-size: 14px;
+    }
+
+    .index__tab:first-child {
+        padding-left: 20px;
+    }
+
+    .index__table-wrapper {
+        overflow-x: auto;
+        margin-bottom: 40px;
+    }
+
+    .index__table {
+        min-width: 600px;
+        font-size: 14px;
+    }
+
+    .index__table-header {
+        padding: 12px 15px 12px 0;
+    }
+
+    .index__table-header:first-child {
+        padding-left: 20px;
+    }
+
+    .index__table-cell {
+        padding: 12px 15px 12px 0;
+    }
+
+    .index__table-cell:first-child {
+        padding-left: 20px;
+    }
+}
