@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//管理者ログイン
+Route::get("/admin/login", function () {
+    return view("auth.admin_login");
+});
+
 Route::middleware("auth")->group(function () {
     // メール認証
     Route::get("/verify_email", function () {

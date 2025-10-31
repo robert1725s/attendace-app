@@ -9,6 +9,7 @@
         <h1 class="login__title">ログイン</h1>
         <form class="login__form" action="/login" method="POST">
             @csrf
+            <input type="hidden" name="login_type" value="user">
 
             <!-- メールアドレス -->
             <div class="login__form-group">

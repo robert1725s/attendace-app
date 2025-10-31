@@ -25,6 +25,7 @@ class LoginTest extends TestCase
         $response = $this->post('/login', [
             'email' => '',
             'password' => 'password123',
+            'login_type' => 'user',
         ]);
 
         // 「メールアドレスを入力してください」というバリデーションメッセージが表示される
@@ -46,6 +47,7 @@ class LoginTest extends TestCase
         $response = $this->post('/login', [
             'email' => 'test@example.com',
             'password' => '',
+            'login_type' => 'user',
         ]);
 
         // 「パスワードを入力してください」というバリデーションメッセージが表示される
@@ -67,6 +69,7 @@ class LoginTest extends TestCase
         $response = $this->post('/login', [
             'email' => 'wrong@example.com',
             'password' => 'password123',
+            'login_type' => 'user',
         ]);
 
         // 「ログイン情報が登録されていません」というバリデーションメッセージが表示される

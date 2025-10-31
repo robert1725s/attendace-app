@@ -5,26 +5,30 @@
 @endsection
 
 @section('content')
-    <div class="login">
+    <div class="login__container">
         <h1 class="login__title">管理者ログイン</h1>
-        <form class="login__form" action="/admin/login" method="POST">
+        <form class="login__form" action="/login" method="POST">
             @csrf
+            <input type="hidden" name="login_type" value="admin">
+
             <!-- メールアドレス -->
             <div class="login__form-group">
-                <label class="login__label">メールアドレス</label>
-                <input type="email" name="email" class="login__input"value="{{ old('email') }}">
+                <label for="email" class="login__label">メールアドレス</label>
+                <input name="email" class="login__input" value="{{ old('email') }}">
                 @error('email')
                     <div class="login__error">{{ $message }}</div>
                 @enderror
             </div>
+
             <!-- パスワード -->
-            <div class="login__form-group">
-                <label class="login__label">パスワード</label>
-                <input type="password" name="password"class="login__input">
+            <div class="login__form-group login__form-group--password">
+                <label for="password" class="login__label">パスワード</label>
+                <input type="password" name="password" class="login__input">
                 @error('password')
                     <div class="login__error">{{ $message }}</div>
                 @enderror
             </div>
+
             <!-- ログインボタン -->
             <button type="submit" class="login__button">
                 管理者ログインする

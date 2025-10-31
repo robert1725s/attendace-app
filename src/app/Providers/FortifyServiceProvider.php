@@ -84,6 +84,15 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
             public function toResponse($request)
             {
+                // リクエスト属性から管理者フラグを取得
+                $isAdmin = $request->attributes->get('logout_is_admin', false);
+
+                // 管理者の場合は管理者ログイン画面へ
+                if ($isAdmin) {
+                    return redirect('/admin/login');
+                }
+
+                // 一般ユーザーは通常のログイン画面へ
                 return redirect('/login');
             }
         });
