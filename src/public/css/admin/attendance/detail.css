@@ -1,94 +1,47 @@
-/* 管理者用勤怠詳細ページのスタイル */
-
-/* ヘッダーナビゲーション */
-.detail__nav {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-.detail__nav-link {
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: opacity 0.3s;
-}
-
-.detail__nav-link:hover {
-    opacity: 0.8;
-}
-
-.detail__nav-form {
-    margin: 0;
-}
-
-.detail__nav-button {
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 0;
-    transition: opacity 0.3s;
-}
-
-.detail__nav-button:hover {
-    opacity: 0.8;
-}
-
+/* 勤怠詳細ページのスタイル */
 /* メインコンテンツ */
-.detail {
-    min-height: calc(100vh - 60px);
-    background-color: #e8e8e8;
-    padding: 40px 20px;
-}
 
 .detail__container {
-    max-width: 1200px;
+    max-width: 940px;
     margin: 0 auto;
+    padding: 0 20px 80px;
 }
 
 /* タイトル */
 .detail__title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #333333;
-    margin-bottom: 30px;
-    padding-left: 16px;
-    border-left: 4px solid #000000;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 90px 0 50px;
+    padding-left: 20px;
+    border-left: 8px solid #000000;
 }
 
 /* 詳細カード */
 .detail__card {
     background-color: #ffffff;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 30px;
+    border-radius: 10px;
+    margin-bottom: 35px;
 }
 
 /* 行 */
 .detail__row {
     display: flex;
-    padding: 24px 32px;
-    border-bottom: 1px solid #e0e0e0;
+    align-items: center;
+    padding: 35px 60px;
+    border-bottom: 2px solid #e1e1e1;
 }
 
 .detail__row:last-child {
     border-bottom: none;
 }
 
-.detail__row--note {
-    align-items: flex-start;
-}
-
 /* ラベル */
 .detail__label {
-    width: 200px;
+    width: 300px;
     font-size: 16px;
-    font-weight: 500;
-    color: #666666;
+    font-weight: bold;
+    color: #737373;
+    letter-spacing: 0.15em;
     flex-shrink: 0;
 }
 
@@ -96,41 +49,49 @@
 .detail__value {
     flex: 1;
     font-size: 16px;
-    color: #333333;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+}
+
+/* 名前 */
+.detail__name {
+    margin-left: 24px;
+    margin-right:140px;
 }
 
 /* 日付 */
 .detail__date-year {
-    margin-right: 40px;
-}
-
-.detail__date-detail {
-    margin-left: 40px;
+    margin-left: 24px;
+    margin-right:130px;
 }
 
 /* 時刻範囲 */
 .detail__time-range {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 40px;
+}
+
+/* 時刻入力フィールド */
+.detail__time-input {
+    padding: 5px 24px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    letter-spacing: 0.15em;
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
 }
 
 /* 時刻ボックス */
 .detail__time-box {
-    display: inline-block;
-    width: 100px;
-    height: 40px;
-    line-height: 40px;
+    padding: 5px 24px;
     text-align: center;
-    background-color: #f5f5f5;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
+    background-color: #ffffff;
     font-size: 16px;
     color: #333333;
-}
-
-.detail__time-box--empty {
-    background-color: #ffffff;
 }
 
 /* 時刻セパレーター */
@@ -139,18 +100,27 @@
     color: #333333;
 }
 
+/* 備考入力フィールド */
+.detail__note-input {
+    width: 100%;
+    max-width: 320px;
+    min-height: 80px;
+    padding: 12px 16px;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    resize: none;
+    font-family: inherit;
+}
+
 /* 備考ボックス */
 .detail__note-box {
     width: 100%;
-    max-width: 500px;
-    min-height: 80px;
+    max-width: 320px;
     padding: 12px 16px;
-    background-color: #f5f5f5;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
     font-size: 14px;
-    color: #333333;
-    line-height: 1.6;
+    font-weight: bold;
 }
 
 /* ボタンラッパー */
@@ -161,20 +131,139 @@
 
 /* 修正ボタン */
 .detail__button {
-    display: inline-block;
-    width: 120px;
-    height: 44px;
-    line-height: 44px;
+    padding: 10px 40px;
     text-align: center;
     background-color: #000000;
     color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 22px;
+    font-weight: bold;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 5px;
+    margin-bottom: 75px;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .detail__button:hover {
     background-color: #333333;
+}
+
+/* 承認待ちメッセージ */
+.detail__pending-message {
+    color: #ff0000;
+    opacity: 0.5;
+    font-size: 18px;
+    font-weight: 800;
+
+    margin: 0;
+}
+
+
+/* 時計アイコンを非表示 */
+.detail__time-input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.detail__time-input::-webkit-inner-spin-button {
+    display: none;
+}
+
+/* 空の時はプレースホルダーを非表示 */
+.detail__time-input.is-empty:not(:focus)::-webkit-datetime-edit {
+    opacity: 0;
+}
+
+/* 値がある時、またはフォーカス時は表示 */
+.detail__time-input.has-value::-webkit-datetime-edit,
+.detail__time-input:focus::-webkit-datetime-edit {
+    opacity: 1;
+}
+
+
+/* エラーメッセージ */
+.detail__error {
+    margin-top: 8px;
+    color: #ff0000;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 850px) {
+    .detail__container {
+        padding: 0 15px 40px;
+    }
+
+    .detail__title {
+        font-size: 24px;
+        margin: 40px 0 30px;
+        padding-left: 15px;
+        border-left: 6px solid #000000;
+    }
+
+    .detail__card {
+        margin-bottom: 25px;
+    }
+
+    .detail__row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 15px;
+    }
+
+    .detail__label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .detail__value {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .detail__name,
+    .detail__date-year {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .detail__time-range {
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .detail__time-box,
+    .detail__time-input {
+        padding: 5px 15px;
+        font-size: 14px;
+    }
+
+    .detail__time-separator {
+        font-size: 14px;
+    }
+
+    .detail__note-box,
+    .detail__note-input {
+        max-width: 100%;
+        font-size: 13px;
+    }
+
+    .detail__button-wrapper {
+        justify-content: center;
+    }
+
+    .detail__button {
+        width: 100%;
+        max-width: 300px;
+        padding: 12px 20px;
+        font-size: 18px;
+        margin-bottom: 40px;
+    }
+
+    .detail__pending-message {
+        font-size: 16px;
+        text-align: center;
+    }
 }

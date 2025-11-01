@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CorrectionController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
@@ -26,39 +27,47 @@ Route::middleware("auth")->group(function () {
         return view("auth.verify_email");
     });
 
-    // 勤怠登録画面
-    Route::get("/attendance", [StaffController::class, 'showAttendance']);
+    // 一般ユーザー専用ルート
+    Route::middleware("user")->group(function () {
+        // 勤怠登録画面
+        Route::get("/attendance", [StaffController::class, 'showAttendance']);
 
-    //勤怠処理
-    Route::post("/attendance/stamp", [StaffController::class, 'stamp']);
-    Route::post("/attendance/rest", [StaffController::class, 'rest']);
+        //勤怠処理
+        Route::post("/attendance/stamp", [StaffController::class, 'stamp']);
+        Route::post("/attendance/rest", [StaffController::class, 'rest']);
 
-    // 勤怠一覧画面
-    Route::get("/attendance/list", [StaffController::class, 'showList']);
+        // 勤怠一覧画面
+        Route::get("/attendance/list", [StaffController::class, 'showList']);
 
-    // 勤怠詳細画面
-    Route::get("/attendance/detail/{id}", [StaffController::class, 'showDetail']);
+        // 勤怠詳細画面
+        Route::get("/attendance/detail/{id}", [StaffController::class, 'showDetail']);
 
-    //勤怠修正申請
-    Route::post("/admin/attendance/modify/{id}", [StaffController::class, 'modify']);
-
-    Route::get("/admin/attendances/list", function () {
-        return view("admin.attendance.index");
+        //勤怠修正
+        Route::post("/attendance/detail/request/{id}", [StaffController::class, 'requestModify']);
     });
 
-    Route::get("/admin/attendance/", function () {
-        return view("admin.attendance.detail");
+    // 管理者専用ルート
+    Route::middleware("admin")->group(function () {
+
+        // 管理者用勤怠一覧画面
+        Route::get("/admin/attendances/list", [AdminController::class, 'showAttendanceList']);
+
+        // 管理者用勤怠詳細画面
+        Route::get("/admin/attendance/{id}", [AdminController::class, 'showDetail']);
+
+        // 管理者用勤怠修正
+        Route::post("/admin/attendance/modify/{id}", [AdminController::class, 'modify']);
+
+        Route::get("/admin/staff/list", function () {
+            return view("admin.staff.index");
+        });
+
+        Route::get("/admin/attendance/staff", function () {
+            return view("admin.staff.attendance");
+        });
     });
 
-    Route::get("/admin/staff/list", function () {
-        return view("admin.staff.index");
-    });
-
-    Route::get("/admin/attendance/staff", function () {
-        return view("admin.staff.attendance");
-    });
-
-    // 申請一覧画面
+    // 申請一覧画面（どちらでもアクセス可）
     Route::get("/stamp_correction_request/list", [CorrectionController::class, 'showCorrection']);
 
     Route::get("/stamp_correction_request/approve", function () {

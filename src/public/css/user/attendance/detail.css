@@ -27,7 +27,7 @@
 .detail__row {
     display: flex;
     align-items: center;
-    padding: 35px;
+    padding: 35px 60px;
     border-bottom: 2px solid #e1e1e1;
 }
 
@@ -140,6 +140,7 @@
     text-decoration: none;
     border-radius: 5px;
     margin-bottom: 75px;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 

@@ -95,7 +95,7 @@ class StaffController extends Controller
 
         // その月の全日付を取得
         $daysInMonth = $currentMonth->daysInMonth;
-        $attendances = [];
+        $dateAttendances = [];
 
         for ($day = 1; $day <= $daysInMonth; $day++) {
             $date = $currentMonth->copy()->day($day);
@@ -108,7 +108,7 @@ class StaffController extends Controller
                 $attendance = null;
             }
 
-            $attendances[] = [
+            $dateAttendances[] = [
                 'date' => $date,
                 'attendance' => $attendance,
             ];
@@ -118,7 +118,7 @@ class StaffController extends Controller
         $prevMonth = $currentMonth->copy()->subMonth()->format('Y-m');
         $nextMonth = $currentMonth->copy()->addMonth()->format('Y-m');
 
-        return view('user.attendance.index', compact('attendances', 'currentMonth', 'prevMonth', 'nextMonth'));
+        return view('user.attendance.index', compact('dateAttendances', 'currentMonth', 'prevMonth', 'nextMonth'));
     }
 
     public function showDetail($id)
@@ -174,7 +174,7 @@ class StaffController extends Controller
         return view('user.attendance.detail', compact('user', 'dateObj', 'displayData', 'rests', 'correctionAttendance', 'attendance'));
     }
 
-    public function modify(DetailRequest $request, $id)
+    public function requestModify(DetailRequest $request, $id)
     {
         $user = Auth::user();
 

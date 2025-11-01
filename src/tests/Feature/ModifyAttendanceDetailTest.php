@@ -40,7 +40,7 @@ class ModifyAttendanceDetailTest extends TestCase
         // 3. 出勤時間を退勤時間より後に設定する
         // 4. 保存処理をする
         $response = $this->from('/attendance/detail/' . $attendance->id)
-            ->post('/admin/attendance/modify/' . $attendance->id, [
+            ->post('/attendance/detail/request/' . $attendance->id, [
                 'start_time' => '18:00',
                 'end_time' => '09:00',
                 'reason' => '時間を修正します',
@@ -80,7 +80,7 @@ class ModifyAttendanceDetailTest extends TestCase
         // 3. 休憩開始時間を退勤時間より後に設定する
         // 4. 保存処理をする
         $response = $this->from('/attendance/detail/' . $attendance->id)
-            ->post('/admin/attendance/modify/' . $attendance->id, [
+            ->post('/attendance/detail/request/' . $attendance->id, [
                 'start_time' => '09:00',
                 'end_time' => '18:00',
                 'rest' => [
@@ -123,7 +123,7 @@ class ModifyAttendanceDetailTest extends TestCase
         // 3. 休憩終了時間を退勤時間より後に設定する
         // 4. 保存処理をする
         $response = $this->from('/attendance/detail/' . $attendance->id)
-            ->post('/admin/attendance/modify/' . $attendance->id, [
+            ->post('/attendance/detail/request/' . $attendance->id, [
                 'start_time' => '09:00',
                 'end_time' => '18:00',
                 'rest' => [
@@ -164,7 +164,7 @@ class ModifyAttendanceDetailTest extends TestCase
 
         // 3. 備考欄を未入力のまま保存処理をする
         $response = $this->from('/attendance/detail/' . $attendance->id)
-            ->post('/admin/attendance/modify/' . $attendance->id, [
+            ->post('/attendance/detail/request/' . $attendance->id, [
                 'start_time' => '09:00',
                 'end_time' => '18:00',
                 'reason' => '',
@@ -198,7 +198,7 @@ class ModifyAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細を修正し保存処理をする
-        $this->post('/admin/attendance/modify/' . $attendance->id, [
+        $this->post('/attendance/detail/request/' . $attendance->id, [
             'start_time' => '09:30',
             'end_time' => '18:30',
             'reason' => '遅延のため',
@@ -245,13 +245,13 @@ class ModifyAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細を修正し保存処理をする
-        $this->post('/admin/attendance/modify/' . $attendance1->id, [
+        $this->post('/attendance/detail/request/' . $attendance1->id, [
             'start_time' => '09:30',
             'end_time' => '18:30',
             'reason' => '遅延のため1',
         ]);
 
-        $this->post('/admin/attendance/modify/' . $attendance2->id, [
+        $this->post('/attendance/detail/request/' . $attendance2->id, [
             'start_time' => '10:00',
             'end_time' => '19:00',
             'reason' => '遅延のため2',
@@ -288,7 +288,7 @@ class ModifyAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細を修正し保存処理をする
-        $this->post('/admin/attendance/modify/' . $attendance->id, [
+        $this->post('/attendance/detail/request/' . $attendance->id, [
             'start_time' => '09:30',
             'end_time' => '18:30',
             'reason' => '遅延のため',
@@ -329,7 +329,7 @@ class ModifyAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細を修正し保存処理をする
-        $this->post('/admin/attendance/modify/' . $attendance->id, [
+        $this->post('/attendance/detail/request/' . $attendance->id, [
             'start_time' => '09:30',
             'end_time' => '18:30',
             'reason' => '遅延のため',

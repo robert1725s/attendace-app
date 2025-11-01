@@ -39,10 +39,10 @@
                     </tr>
                 </thead>
                 <tbody class="index__table-body">
-                    @foreach ($attendances as $item)
+                    @foreach ($dateAttendances as $dateAttendance)
                         @php
-                            $date = $item['date'];
-                            $attendance = $item['attendance'];
+                            $date = $dateAttendance['date'];
+                            $attendance = $dateAttendance['attendance'];
                             $dayOfWeek = $date->isoFormat('(ddd)');
                         @endphp
                         <tr class="index__table-row">

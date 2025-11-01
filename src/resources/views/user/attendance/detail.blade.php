@@ -9,7 +9,7 @@
         <!-- タイトル -->
         <h1 class="detail__title">勤怠詳細</h1>
 
-        <form action="/admin/attendance/modify/{{ $attendance?->id ?? 'new' }}" method="POST">
+        <form action="/attendance/detail/request/{{ $attendance?->id ?? 'new' }}" method="POST">
             @csrf
             <input type="hidden" name="date" value="{{ $dateObj->format('Y-m-d') }}">
 
