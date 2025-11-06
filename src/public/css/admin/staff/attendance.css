@@ -1,152 +1,225 @@
-/* リセット・基本設定 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-}
+/* 勤怠一覧ページのスタイル */
 
 /* メインコンテンツ */
-.attendance {
-    padding: 40px 20px;
-}
-
 .attendance__container {
-    max-width: 1000px;
+    max-width: 940px;
+    padding: 0 20px;
     margin: 0 auto;
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* タイトル */
 .attendance__title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 30px;
-    padding-left: 12px;
-    border-left: 4px solid #000;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 90px 0 45px;
+    padding-left: 20px;
+    border-left: 8px solid #000000;
 }
 
-/* 月ナビゲーション */
-.attendance__month-navigation {
+/* 月次ナビゲーション */
+.attendance__month-nav {
+    background-color: #fff;
+    padding: 17px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
-    padding: 15px 20px;
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
+    margin-bottom: 45px;
+    border-radius: 10px;
 }
 
-.attendance__month-button {
-    background: none;
-    border: none;
-    color: #666;
-    font-size: 14px;
-    cursor: pointer;
-    padding: 8px 12px;
-    transition: color 0.3s;
-}
-
-.attendance__month-button:hover {
-    color: #000;
-}
-
-.attendance__month-display {
+.attendance__month-link {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 16px;
-    font-weight: 600;
+    color: #737373;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
-.attendance__calendar-icon {
-    font-size: 18px;
+.attendance__month-link:hover {
+    color: #333333;
+}
+
+.attendance__month-arrow {
+    width: 20px;
+    opacity: 0.3;
+    letter-spacing: 0.15em;
+}
+
+.attendance__month-arrow--next {
+    transform: rotate(180deg);
 }
 
 .attendance__month-text {
-    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.attendance__month-current {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.attendance__month-icon {
+    width: 25px;
+}
+
+.attendance__month-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* テーブルラッパー */
+.attendance__table-wrapper {
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 60px;
 }
 
 /* テーブル */
-.attendance__table-wrapper {
-    overflow-x: auto;
-    margin-bottom: 30px;
-}
-
 .attendance__table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #fff;
 }
 
 .attendance__table-head {
-    background-color: #f8f8f8;
+    border-bottom: 3px solid #E1E1E1;
 }
 
 .attendance__table-row {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 2px solid #E1E1E1;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+}
+
+.attendance__table-row:last-child {
+    border-bottom: none;
 }
 
 .attendance__table-header {
-    padding: 15px 10px;
+    padding: 15px;
     text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    color: #737373;
 }
 
 .attendance__table-cell {
-    padding: 15px 10px;
+    padding: 14px;
     text-align: center;
-    font-size: 13px;
-    color: #333;
+    color: #737373;
 }
 
-.attendance__table-body .attendance__table-row:hover {
-    background-color: #fafafa;
+/* 詳細リンク */
+.attendance__detail-link {
+    color: #000000;
+    text-decoration: none;
+    transition: opacity 0.3s;
 }
 
-.attendance__table-cell:first-child {
-    text-align: left;
-    padding-left: 20px;
+.attendance__detail-link:hover {
+    opacity: 0.7;
 }
 
-.attendance__table-cell:last-child {
-    color: #666;
-    cursor: pointer;
-}
-
-.attendance__table-cell:last-child:hover {
-    color: #000;
-    text-decoration: underline;
-}
-
-/* アクション */
-.attendance__actions {
+/* CSV出力ボタン */
+.attendance__csv-form {
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 70px;
 }
 
 .attendance__csv-button {
-    background-color: #000;
-    color: #fff;
+    background-color: #000000;
+    color: #ffffff;
     border: none;
-    padding: 12px 30px;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 4px;
+    padding: 12px 40px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .attendance__csv-button:hover {
-    background-color: #333;
+    background-color: #333333;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 850px) {
+    .attendance__container {
+        padding: 0 15px;
+    }
+
+    .attendance__title {
+        font-size: 22px;
+        margin: 60px 0 20px;
+        padding-left: 12px;
+        border-left: 5px solid #000000;
+    }
+
+    .attendance__month-nav {
+        padding: 12px 16px;
+        margin-bottom: 15px;
+    }
+
+    .attendance__month-link {
+        font-size: 12px;
+        gap: 6px;
+    }
+
+    .attendance__month-arrow {
+        width: 16px;
+    }
+
+    .attendance__month-text {
+        font-size: 12px;
+    }
+
+    .attendance__month-icon {
+        width: 20px;
+    }
+
+    .attendance__month-label {
+        font-size: 14px;
+    }
+
+    .attendance__table-wrapper {
+        overflow-x: auto;
+        margin-bottom: 50px;
+    }
+
+    .attendance__table {
+        min-width: 600px;
+    }
+
+    .attendance__table-row {
+        letter-spacing: 0.05em;
+    }
+
+    .attendance__table-header {
+        padding: 12px 8px;
+        font-size: 14px;
+    }
+
+    .attendance__table-cell {
+        padding: 12px 8px;
+        font-size: 14px;
+    }
+
+    .attendance__csv-form {
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 50px;
+    }
+
+    .attendance__csv-button {
+        width: 100%;
+        max-width: 300px;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
 }

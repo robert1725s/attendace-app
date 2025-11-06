@@ -52,19 +52,20 @@ Route::middleware("auth")->group(function () {
         // 管理者用勤怠一覧画面
         Route::get("/admin/attendances/list", [AdminController::class, 'showAttendanceList']);
 
-        // 管理者用勤怠詳細画面
+        // 管理者用勤怠詳細画面（新規・既存両方対応）
         Route::get("/admin/attendance/{id}", [AdminController::class, 'showDetail']);
 
         // 管理者用勤怠修正
         Route::post("/admin/attendance/modify/{id}", [AdminController::class, 'modify']);
 
-        Route::get("/admin/staff/list", function () {
-            return view("admin.staff.index");
-        });
+        // 管理者用スタッフ一覧画面
+        Route::get("/admin/staff/list", [AdminController::class, 'showStaffList']);
 
-        Route::get("/admin/attendance/staff", function () {
-            return view("admin.staff.attendance");
-        });
+        // 管理者用スタッフ別勤怠一覧画面
+        Route::get("/admin/attendance/staff/{id}", [AdminController::class, 'showStaffAttendance']);
+
+        // 管理者用スタッフ勤怠CSV出力
+        Route::post("/admin/attendance/staff/output/{id}", [AdminController::class, 'outputAttendance']);
     });
 
     // 申請一覧画面（どちらでもアクセス可）

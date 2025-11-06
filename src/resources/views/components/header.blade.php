@@ -12,7 +12,7 @@
                         {{-- 管理者用ナビゲーション --}}
                         <a href="/admin/attendances/list" class="header__nav-link">勤怠一覧</a>
                         <a href="/admin/staff/list" class="header__nav-link">スタッフ一覧</a>
-                        <a href="stamp_correction_request/list" class="header__nav-link">申請一覧</a>
+                        <a href="/stamp_correction_request/list" class="header__nav-link">申請一覧</a>
                     @else
                         {{-- 一般ユーザ用ナビゲーション --}}
                         <a href="/attendance" class="header__nav-link">勤怠</a>

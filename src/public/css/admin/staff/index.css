@@ -1,113 +1,161 @@
-/* 管理者用スタッフ一覧ページのスタイル */
-
-/* ヘッダーナビゲーション */
-.index__nav {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-.index__nav-link {
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: opacity 0.3s;
-}
-
-.index__nav-link:hover {
-    opacity: 0.8;
-}
-
-.index__nav-form {
-    margin: 0;
-}
-
-.index__nav-button {
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 0;
-    transition: opacity 0.3s;
-}
-
-.index__nav-button:hover {
-    opacity: 0.8;
-}
-
-/* メインコンテンツ */
-.index {
-    min-height: calc(100vh - 60px);
-    background-color: #e8e8e8;
-    padding: 40px 20px;
-}
+/* スタッフ一覧ページのスタイル */
 
 .index__container {
-    max-width: 1200px;
+    max-width: 940px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* タイトル */
 .index__title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #333333;
-    margin-bottom: 30px;
-    padding-left: 16px;
-    border-left: 4px solid #000000;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 80px 0 65px;
+    padding-left: 20px;
+    border-left: 8px solid #000000;
 }
 
 /* テーブルラッパー */
 .index__table-wrapper {
     background-color: #ffffff;
-    border-radius: 4px;
+    border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 80px;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* テーブル */
 .index__table {
-    width: 100%;
+    width: 900px;
+    margin: 0 auto;
+    font-size: 16px;
+    letter-spacing: 0.15em;
+    font-weight: bold;
+    color: #737373;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
-.index__table-head {
-    background-color: #f5f5f5;
+.index__table-head .index__table-row {
+    border-bottom: 3px solid #e1e1e1;
 }
 
 .index__table-row {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 2px solid #e1e1e1;
 }
 
-.index__table-row:last-child {
+.index__table-body .index__table-row:last-child {
     border-bottom: none;
 }
 
-.index__table-header {
-    padding: 16px;
+/* ヘッダー行 */
+.index__table-header,
+.index__table-cell {
+    padding: 14px 10px;
     text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: #333333;
 }
 
-.index__table-cell {
-    padding: 16px;
+.index__table-header:first-child,
+.index__table-cell:first-child {
+    width: 300px;
+    padding-left: 170px;
+}
+
+.index__table-cell:last-child,
+.index__table-header:last-child {
+    width: 230px;
+    padding-right: 130px;
+}
+
+.index__table-cell--empty {
     text-align: center;
-    font-size: 14px;
-    color: #333333;
+    color: #737373;
 }
 
 /* 詳細リンク */
 .index__detail-link {
     color: #000000;
     text-decoration: none;
-    font-weight: 500;
     transition: opacity 0.3s;
 }
 
 .index__detail-link:hover {
     opacity: 0.7;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 850px) {
+    .index__container {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .index__title {
+        font-size: 24px;
+        margin: 40px 0 30px;
+        padding-left: 15px;
+        border-left: 6px solid #000000;
+    }
+
+    .index__table-wrapper {
+        overflow-x: auto;
+        margin-bottom: 40px;
+        width: 100%;
+    }
+
+    .index__table {
+        min-width: 700px;
+        width: 700px;
+        font-size: 14px;
+    }
+
+    .index__table-header {
+        padding: 12px 10px;
+    }
+
+    .index__table-header:nth-child(1) {
+        width: 150px;
+    }
+
+    .index__table-header:nth-child(2) {
+        width: 250px;
+    }
+
+    .index__table-header:nth-child(3) {
+        width: 150px;
+    }
+
+    .index__table-header:first-child {
+        padding-left: 50px;
+    }
+
+    .index__table-header:last-child {
+        padding-right: 50px;
+    }
+
+    .index__table-cell {
+        padding: 12px 10px;
+    }
+
+    .index__table-cell:nth-child(1) {
+        width: 150px;
+    }
+
+    .index__table-cell:nth-child(2) {
+        width: 250px;
+    }
+
+    .index__table-cell:nth-child(3) {
+        width: 150px;
+    }
+
+    .index__table-cell:first-child {
+        padding-left: 50px;
+    }
+
+    .index__table-cell:last-child {
+        padding-right: 50px;
+    }
 }

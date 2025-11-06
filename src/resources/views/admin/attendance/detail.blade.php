@@ -9,7 +9,7 @@
         <!-- タイトル -->
         <h1 class="detail__title">勤怠詳細</h1>
 
-        <form action="/admin/attendance/modify/{{ $attendance->id }}" method="POST">
+        <form action="/admin/attendance/modify/{{ $attendance->id ?? 'new?date=' . $dateObj->format('Y-m-d') . '&user_id=' . $user->id }}" method="POST">
             @csrf
 
             <!-- 詳細カード -->
