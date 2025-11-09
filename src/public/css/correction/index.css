@@ -48,7 +48,6 @@
     background-color: #ffffff;
     border-radius: 10px;
     overflow: hidden;
-    padding-bottom: 3px;
     margin-bottom: 80px;
 }
 
@@ -68,6 +67,10 @@
 
 .index__table-row {
     border-bottom: 2px solid #e1e1e1;
+}
+
+.index__table-body .index__table-row:last-child {
+    border-bottom: none;
 }
 
 /* ヘッダー行 */

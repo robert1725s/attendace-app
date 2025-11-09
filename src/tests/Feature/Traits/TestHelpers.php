@@ -15,7 +15,6 @@ trait TestHelpers
     protected function createUnverifiedUser(array $attributes = []): User
     {
         return User::factory()->create(array_merge([
-            'email' => 'test@example.com',
             'password' => Hash::make('password123'),
             'email_verified_at' => null,
         ], $attributes));
@@ -27,7 +26,6 @@ trait TestHelpers
     protected function createVerifiedUser(array $attributes = []): User
     {
         return User::factory()->create(array_merge([
-            'email' => 'test@example.com',
             'password' => Hash::make('password123'),
             'email_verified_at' => now(),
         ], $attributes));
@@ -39,7 +37,6 @@ trait TestHelpers
     protected function createAdminUser(array $attributes = []): User
     {
         return User::factory()->create(array_merge([
-            'email' => 'admin@example.com',
             'is_admin' => true,
             'password' => Hash::make('password123'),
             'email_verified_at' => now(),

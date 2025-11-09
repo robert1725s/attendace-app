@@ -16,8 +16,8 @@ class AttendanceTableSeeder extends Seeder
      */
     public function run()
     {
-        // ユーザーID 1と2に対して処理
-        $userIds = [1, 2];
+        // 認証済み一般ユーザー（ID: 1, 4, 5, 6）と未認証ユーザー（ID: 2）に対して処理
+        $userIds = [1, 2, 4, 5, 6];
 
         foreach ($userIds as $userId) {
             // 昨日から過去3ヶ月分（90日）

@@ -15,10 +15,10 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        // 認証済みユーザー
+        // 認証済みユーザー1
         User::create([
             'name' => '認証した男',
-            'email' => 'verified@example.com',
+            'email' => 'verified@coachtech.com',
             'password' => Hash::make('12345678'),
             'email_verified_at' => now(),
         ]);
@@ -26,18 +26,42 @@ class UserTableSeeder extends Seeder
         // 未認証ユーザー
         User::create([
             'name' => '未認証です子',
-            'email' => 'unverified@example.com',
+            'email' => 'unverified@coachtech.com',
             'password' => Hash::make('12345678'),
             'email_verified_at' => null,
         ]);
 
-        // 管理者ユーザー（認証済み）
+        // 管理者ユーザー
         User::create([
             'name' => '管理者',
-            'email' => 'admin@example.com',
+            'email' => 'admin@coachtech.com',
             'password' => Hash::make('12345678'),
             'email_verified_at' => now(),
             'is_admin' => true,
+        ]);
+
+        // 認証済みユーザー2
+        User::create([
+            'name' => 'テストユーザ2',
+            'email' => 'test2@coachtech.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
+        ]);
+
+        // 認証済みユーザー3
+        User::create([
+            'name' => 'テストユーザ3',
+            'email' => 'test3@coachtech.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
+        ]);
+
+        // 認証済みユーザー4
+        User::create([
+            'name' => 'テストユーザ4',
+            'email' => 'test4@coachtech.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
         ]);
     }
 }

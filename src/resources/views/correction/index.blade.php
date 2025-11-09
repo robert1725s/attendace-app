@@ -40,8 +40,13 @@
                             <td class="index__table-cell">{{ $correction->reason }}</td>
                             <td class="index__table-cell">{{ $correction->created_at->format('Y/m/d') }}</td>
                             <td class="index__table-cell">
-                                <a href="{{ url('/attendance/detail/' . $correction->attendance_id) }}"
-                                    class="index__detail-link">詳細</a>
+                                @if(Auth::user()->is_admin)
+                                    <a href="{{ url('/stamp_correction_request/approve/' . $correction->id) }}"
+                                        class="index__detail-link">詳細</a>
+                                @else
+                                    <a href="{{ url('/attendance/detail/' . $correction->attendance_id) }}"
+                                        class="index__detail-link">詳細</a>
+                                @endif
                             </td>
                         </tr>
                     @empty

@@ -68,10 +68,12 @@ Route::middleware("auth")->group(function () {
         Route::post("/admin/attendance/staff/output/{id}", [AdminController::class, 'outputAttendance']);
     });
 
-    // 申請一覧画面（どちらでもアクセス可）
+    // 申請一覧画面
     Route::get("/stamp_correction_request/list", [CorrectionController::class, 'showCorrection']);
 
-    Route::get("/stamp_correction_request/approve", function () {
-        return view("correction.approve");
-    });
+    // 申請承認画面
+    Route::get("/stamp_correction_request/approve/{attendance_correct_request_id}", [CorrectionController::class, 'showApprove']);
+
+    // 申請承認処理
+    Route::post("/stamp_correction_request/approve/{attendance_correct_request_id}", [CorrectionController::class, 'approve']);
 });

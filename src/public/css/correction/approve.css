@@ -1,105 +1,272 @@
-/* リセット・基本設定 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-}
-
+/* 承認ページのスタイル */
 /* メインコンテンツ */
-.approve {
-    padding: 40px 20px;
-}
 
 .approve__container {
-    max-width: 800px;
+    max-width: 940px;
     margin: 0 auto;
+    padding: 0 20px 80px;
 }
 
+/* タイトル */
 .approve__title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 30px;
-    padding-left: 12px;
-    border-left: 4px solid #000;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 90px 0 50px;
+    padding-left: 20px;
+    border-left: 8px solid #000000;
 }
 
-/* カード */
+/* 詳細カード */
 .approve__card {
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 35px;
 }
 
+/* 行 */
 .approve__row {
     display: flex;
-    border-bottom: 1px solid #e0e0e0;
-    min-height: 60px;
+    align-items: center;
+    padding: 35px 60px;
+    border-bottom: 2px solid #e1e1e1;
 }
 
 .approve__row:last-child {
     border-bottom: none;
 }
 
+/* ラベル */
 .approve__label {
-    width: 200px;
-    padding: 20px 30px;
-    background-color: #fafafa;
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
-    display: flex;
-    align-items: center;
-    border-right: 1px solid #e0e0e0;
+    width: 300px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #737373;
+    letter-spacing: 0.15em;
+    flex-shrink: 0;
 }
 
+/* 値 */
 .approve__value {
     flex: 1;
-    padding: 20px 30px;
-    font-size: 14px;
-    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+}
+
+/* 名前 */
+.approve__name {
+    margin-left: 24px;
+    margin-right: 140px;
+}
+
+/* 日付 */
+.approve__date-year {
+    margin-left: 24px;
+    margin-right: 130px;
+}
+
+/* 時刻範囲 */
+.approve__time-range {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 40px;
 }
 
-.approve__date-year {
-    margin-right: 20px;
+/* 時刻入力フィールド */
+.approve__time-input {
+    padding: 5px 24px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    letter-spacing: 0.15em;
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
 }
 
-.approve__time {
-    font-weight: 500;
+/* 時刻ボックス */
+.approve__time-box {
+    padding: 5px 24px;
+    text-align: center;
+    background-color: #ffffff;
+    font-size: 16px;
+    color: #333333;
 }
 
-.approve__separator {
-    color: #666;
+/* 時刻セパレーター */
+.approve__time-separator {
+    font-size: 16px;
+    color: #333333;
 }
 
-/* アクション */
-.approve__actions {
+/* 備考入力フィールド */
+.approve__note-input {
+    width: 100%;
+    max-width: 320px;
+    min-height: 80px;
+    padding: 12px 16px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    resize: none;
+    font-family: inherit;
+}
+
+/* 備考ボックス */
+.approve__note-box {
+    width: 100%;
+    max-width: 320px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* ボタンラッパー */
+.approve__button-wrapper {
     display: flex;
     justify-content: flex-end;
-    margin-top: 30px;
 }
 
+/* 承認ボタン */
 .approve__button {
-    background-color: #000;
-    color: #fff;
-    border: none;
-    padding: 12px 40px;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 4px;
+    padding: 10px 40px;
+    text-align: center;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 75px;
     cursor: pointer;
     transition: background-color 0.3s;
+    border: none;
 }
 
 .approve__button:hover {
-    background-color: #333;
+    background-color: #333333;
+}
+
+/* 承認済みボタン */
+.approve__button--disabled {
+    background-color: #737373;
+}
+
+/* 承認待ちメッセージ */
+.approve__pending-message {
+    color: #ff0000;
+    opacity: 0.5;
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0;
+}
+
+/* 時計アイコンを非表示 */
+.approve__time-input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.approve__time-input::-webkit-inner-spin-button {
+    display: none;
+}
+
+/* 空の時はプレースホルダーを非表示 */
+.approve__time-input.is-empty:not(:focus)::-webkit-datetime-edit {
+    opacity: 0;
+}
+
+/* 値がある時、またはフォーカス時は表示 */
+.approve__time-input.has-value::-webkit-datetime-edit,
+.approve__time-input:focus::-webkit-datetime-edit {
+    opacity: 1;
+}
+
+/* エラーメッセージ */
+.approve__error {
+    margin-top: 8px;
+    color: #ff0000;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 850px) {
+    .approve__container {
+        padding: 0 15px 40px;
+    }
+
+    .approve__title {
+        font-size: 24px;
+        margin: 40px 0 30px;
+        padding-left: 15px;
+        border-left: 6px solid #000000;
+    }
+
+    .approve__card {
+        margin-bottom: 25px;
+    }
+
+    .approve__row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 15px;
+    }
+
+    .approve__label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .approve__value {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .approve__name,
+    .approve__date-year {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .approve__time-range {
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .approve__time-box,
+    .approve__time-input {
+        padding: 5px 15px;
+        font-size: 14px;
+    }
+
+    .approve__time-separator {
+        font-size: 14px;
+    }
+
+    .approve__note-box,
+    .approve__note-input {
+        max-width: 100%;
+        font-size: 13px;
+    }
+
+    .approve__button-wrapper {
+        justify-content: center;
+    }
+
+    .approve__button {
+        width: 100%;
+        max-width: 300px;
+        padding: 12px 20px;
+        font-size: 18px;
+        margin-bottom: 40px;
+    }
+
+    .approve__pending-message {
+        font-size: 16px;
+        text-align: center;
+    }
 }
