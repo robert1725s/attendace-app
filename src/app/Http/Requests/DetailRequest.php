@@ -29,7 +29,7 @@ class DetailRequest extends FormRequest
                 'date_format:H:i',
                 function ($attribute, $value, $fail) {
                     $endTime = $this->input('end_time');
-                    if ($endTime && $value >= $endTime) {
+                    if ($endTime && $value > $endTime) {
                         $fail('出勤時間もしくは退勤時間が不適切な値です');
                     }
                 },
@@ -40,12 +40,12 @@ class DetailRequest extends FormRequest
                 function ($attribute, $value, $fail) {
                     // start_timeでメッセージを出す場合は、スキップする
                     $endTime = $this->input('end_time');
-                    if ($endTime && $value >= $endTime) {
+                    if ($endTime && $value > $endTime) {
                         return;
                     }
 
                     $startTime = $this->input('start_time');
-                    if ($value <= $startTime) {
+                    if ($value < $startTime) {
                         $fail('出勤時間もしくは退勤時間が不適切な値です');
                     }
                 },
@@ -75,13 +75,13 @@ class DetailRequest extends FormRequest
                     $endTime = $this->input('end_time');
 
                     // 出勤時間より後かチェック
-                    if ($startTime && $value <= $startTime) {
+                    if ($startTime && $value < $startTime) {
                         $fail('休憩時間が不適切な値です');
                         return;
                     }
 
                     // 退勤時間より前かチェック
-                    if ($endTime && $value >= $endTime) {
+                    if ($endTime && $value > $endTime) {
                         $fail('休憩時間が不適切な値です');
                         return;
                     }
@@ -90,7 +90,7 @@ class DetailRequest extends FormRequest
                     if (isset($matches[1])) {
                         $index = $matches[1];
                         $restEnd = $this->input("rest.{$index}.end");
-                        if ($restEnd && $value >= $restEnd) {
+                        if ($restEnd && $value > $restEnd) {
                             $fail('休憩時間が不適切な値です');
                         }
                     }
@@ -121,13 +121,13 @@ class DetailRequest extends FormRequest
                     $endTime = $this->input('end_time');
 
                     // 出勤時間より後かチェック
-                    if ($startTime && $value <= $startTime) {
+                    if ($startTime && $value < $startTime) {
                         $fail('休憩時間もしくは退勤時間が不適切な値です');
                         return;
                     }
 
                     // 退勤時間より前かチェック
-                    if ($endTime && $value >= $endTime) {
+                    if ($endTime && $value > $endTime) {
                         $fail('休憩時間もしくは退勤時間が不適切な値です');
                         return;
                     }
@@ -136,7 +136,7 @@ class DetailRequest extends FormRequest
                     if (isset($matches[1])) {
                         $index = $matches[1];
                         $restStart = $this->input("rest.{$index}.start");
-                        if ($restStart && $value <= $restStart) {
+                        if ($restStart && $value < $restStart) {
                             $fail('休憩時間もしくは退勤時間が不適切な値です');
                         }
                     }
