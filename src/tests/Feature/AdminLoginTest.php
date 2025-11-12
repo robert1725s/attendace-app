@@ -25,7 +25,7 @@ class AdminLoginTest extends TestCase
 
         // 2. メールアドレス以外のユーザー情報を入力する
         // 3. ログインの処理を行う
-        $this->from('/admin/login')
+        $response = $this->from('/admin/login')
             ->post('/login', [
                 'email' => '',
                 'password' => 'password123',
@@ -33,8 +33,9 @@ class AdminLoginTest extends TestCase
             ]);
 
         // 「メールアドレスを入力してください」というバリデーションメッセージが表示される
-        $errors = session('errors');
-        $this->assertStringContainsString('メールアドレスを入力してください', $errors->first('email'));
+        $response->assertSessionHasErrors([
+            'email' => 'メールアドレスを入力してください'
+        ]);
     }
 
     /**
@@ -51,7 +52,7 @@ class AdminLoginTest extends TestCase
 
         // 2. パスワード以外のユーザー情報を入力する
         // 3. ログインの処理を行う
-        $this->from('/admin/login')
+        $response = $this->from('/admin/login')
             ->post('/login', [
                 'email' => 'admin@example.com',
                 'password' => '',
@@ -59,8 +60,9 @@ class AdminLoginTest extends TestCase
             ]);
 
         // 「パスワードを入力してください」というバリデーションメッセージが表示される
-        $errors = session('errors');
-        $this->assertStringContainsString('パスワードを入力してください', $errors->first('password'));
+        $response->assertSessionHasErrors([
+            'password' => 'パスワードを入力してください'
+        ]);
     }
 
     /**
@@ -77,7 +79,7 @@ class AdminLoginTest extends TestCase
 
         // 2. 誤ったメールアドレスのユーザー情報を入力する
         // 3. ログインの処理を行う
-        $this->from('/admin/login')
+        $response = $this->from('/admin/login')
             ->post('/login', [
                 'email' => 'wrong@example.com',
                 'password' => 'password123',
@@ -85,7 +87,8 @@ class AdminLoginTest extends TestCase
             ]);
 
         // 「ログイン情報が登録されていません」というバリデーションメッセージが表示される
-        $errors = session('errors');
-        $this->assertStringContainsString('ログイン情報が登録されていません', $errors->first('email'));
+        $response->assertSessionHasErrors([
+            'email' => 'ログイン情報が登録されていません'
+        ]);
     }
 }

@@ -9,6 +9,13 @@
         <!-- タイトル -->
         <h1 class="approve__title">勤怠詳細</h1>
 
+        <!-- 成功メッセージ -->
+        @if (session('success'))
+            <div class="approve__success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <form action="/stamp_correction_request/approve/{{ $correction->id }}" method="POST">
             @csrf
 
@@ -52,7 +59,7 @@
                 </div>
 
                 <!-- 休憩 -->
-                @for ($i = 0; $i < max(2, $rests->count()); $i++)
+                @for ($i = 0; $i < $rests->count() + 1; $i++)
                     <div class="approve__row">
                         <div class="approve__label">休憩{{ $i === 0 ? '' : $i + 1 }}</div>
                         <div class="approve__value">

@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// ルートパスからログインページへリダイレクト
+Route::get("/", function () {
+    return redirect("/login");
+});
+
 //管理者ログイン
 Route::get("/admin/login", function () {
     return view("auth.admin_login");
@@ -52,7 +57,7 @@ Route::middleware("auth")->group(function () {
         // 管理者用勤怠一覧画面
         Route::get("/admin/attendances/list", [AdminController::class, 'showAttendanceList']);
 
-        // 管理者用勤怠詳細画面（新規・既存両方対応）
+        // 管理者用勤怠詳細画面
         Route::get("/admin/attendance/{id}", [AdminController::class, 'showDetail']);
 
         // 管理者用勤怠修正

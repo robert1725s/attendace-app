@@ -35,7 +35,7 @@ class ModifyAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細ページを開く
-        $this->get('/attendance/detail/' . $attendance->id);
+        $response = $this->get('/attendance/detail/' . $attendance->id);
 
         // 3. 出勤時間を退勤時間より後に設定する
         // 4. 保存処理をする
@@ -47,9 +47,9 @@ class ModifyAttendanceDetailTest extends TestCase
             ]);
 
         // 「出勤時間もしくは退勤時間が不適切な値です」というバリデーションメッセージが表示される
-        $errors = session('errors');
-        $this->assertTrue($errors->has('start_time'));
-        $this->assertStringContainsString('出勤時間もしくは退勤時間が不適切な値です', $errors->first('start_time'));
+        $response->assertSessionHasErrors([
+            'start_time' => '出勤時間もしくは退勤時間が不適切な値です'
+        ]);
     }
 
     /**
@@ -75,7 +75,7 @@ class ModifyAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細ページを開く
-        $this->get('/attendance/detail/' . $attendance->id);
+        $response = $this->get('/attendance/detail/' . $attendance->id);
 
         // 3. 休憩開始時間を退勤時間より後に設定する
         // 4. 保存処理をする
@@ -90,9 +90,9 @@ class ModifyAttendanceDetailTest extends TestCase
             ]);
 
         // 「休憩時間が不適切な値です」というバリデーションメッセージが表示される
-        $errors = session('errors');
-        $this->assertTrue($errors->has('rest.0.start'));
-        $this->assertStringContainsString('休憩時間が不適切な値です', $errors->first('rest.0.start'));
+        $response->assertSessionHasErrors([
+            'rest.0.start' => '休憩時間が不適切な値です'
+        ]);
     }
 
     /**
@@ -118,7 +118,7 @@ class ModifyAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細ページを開く
-        $this->get('/attendance/detail/' . $attendance->id);
+        $response = $this->get('/attendance/detail/' . $attendance->id);
 
         // 3. 休憩終了時間を退勤時間より後に設定する
         // 4. 保存処理をする
@@ -133,9 +133,9 @@ class ModifyAttendanceDetailTest extends TestCase
             ]);
 
         // 「休憩時間もしくは退勤時間が不適切な値です」というバリデーションメッセージが表示される
-        $errors = session('errors');
-        $this->assertTrue($errors->has('rest.0.end'));
-        $this->assertStringContainsString('休憩時間もしくは退勤時間が不適切な値です', $errors->first('rest.0.end'));
+        $response->assertSessionHasErrors([
+            'rest.0.end' => '休憩時間もしくは退勤時間が不適切な値です'
+        ]);
     }
 
     /**
@@ -160,7 +160,7 @@ class ModifyAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細ページを開く
-        $this->get('/attendance/detail/' . $attendance->id);
+        $response = $this->get('/attendance/detail/' . $attendance->id);
 
         // 3. 備考欄を未入力のまま保存処理をする
         $response = $this->from('/attendance/detail/' . $attendance->id)
@@ -171,9 +171,9 @@ class ModifyAttendanceDetailTest extends TestCase
             ]);
 
         // 「備考を記入してください」というバリデーションメッセージが表示される
-        $errors = session('errors');
-        $this->assertTrue($errors->has('reason'));
-        $this->assertStringContainsString('備考を記入してください', $errors->first('reason'));
+        $response->assertSessionHasErrors([
+            'reason' => '備考を記入してください'
+        ]);
     }
 
     /**
@@ -204,11 +204,21 @@ class ModifyAttendanceDetailTest extends TestCase
             'reason' => '遅延のため',
         ]);
 
+        // 修正申請のIDを取得
+        $correction = \App\Models\CorrectionAttendance::where('attendance_id', $attendance->id)->first();
+
         // 3. 管理者ユーザーで承認画面と申請一覧画面を確認する
         $admin = $this->loginAsAdmin();
 
+        // 修正申請が実行され、管理者の承認画面に表示される
+        $response = $this->get('/stamp_correction_request/approve/' . $correction->id);
+        $response->assertSee('勤怠詳細', false);
+        $response->assertSee($user->name, false);
+        $response->assertSee('09:30', false);
+        $response->assertSee('18:30', false);
+        $response->assertSee('遅延のため', false);
 
-        // 修正申請が実行され、管理者の承認画面と申請一覧画面に表示される
+        // 申請一覧画面にも表示される
         $response = $this->get('/stamp_correction_request/list');
         $response->assertSee($user->name, false);
         $response->assertSee('遅延のため', false);
@@ -257,7 +267,7 @@ class ModifyAttendanceDetailTest extends TestCase
             'reason' => '遅延のため2',
         ]);
 
-        // 3. 申請一覧画面を確認する
+        // 3. 申請一覧画面を確認する(承認待ちタブ)
         $response = $this->get('/stamp_correction_request/list');
 
         // 申請一覧に自分の申請が全て表示されている
@@ -294,9 +304,15 @@ class ModifyAttendanceDetailTest extends TestCase
             'reason' => '遅延のため',
         ]);
 
-        // 管理者が承認処理（is_approvedをtrueに更新）
+        // 修正申請のIDを取得
         $correction = \App\Models\CorrectionAttendance::where('attendance_id', $attendance->id)->first();
-        $correction->update(['is_approved' => true]);
+
+        // 管理者でログインして承認処理を実行
+        $this->loginAsAdmin();
+        $this->post('/stamp_correction_request/approve/' . $correction->id);
+
+        // 一般ユーザーに戻る
+        $this->actingAs($user);
 
         // 3. 申請一覧画面を開く（承認済みタブ）
         $response = $this->get('/stamp_correction_request/list?tab=approved');

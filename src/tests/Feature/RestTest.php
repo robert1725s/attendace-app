@@ -29,7 +29,7 @@ class RestTest extends TestCase
         $response->assertSee('休憩入', false);
 
         // 3. 休憩の処理を行う
-        $response = $this->post('/attendance/rest');
+        $response = $this->from('/attendance')->post('/attendance/rest');
 
         // リダイレクトされる
         $response->assertRedirect('/attendance');
@@ -82,7 +82,7 @@ class RestTest extends TestCase
         $response->assertSee('休憩戻', false);
 
         // 3. 休憩戻の処理を行う
-        $response = $this->post('/attendance/rest');
+        $response = $this->from('/attendance')->post('/attendance/rest');
 
         // リダイレクトされる
         $response->assertRedirect('/attendance');
@@ -130,13 +130,13 @@ class RestTest extends TestCase
 
         // 2. 休憩入と休憩戻の処理を行う
         $this->post('/attendance/rest'); // 休憩入
-        sleep(1); // 1秒待機して時間差を作る
+        $this->travel(1)->hours(); // 1時間進める
         $this->post('/attendance/rest'); // 休憩戻
 
         // 3. 勤怠一覧画面から休憩の日付を確認する
         $response = $this->get('/attendance/list');
 
         // 勤怠一覧画面に休憩時刻が正確に記録されている（休憩時間が表示される）
-        $response->assertSee('0:00', false); // 1秒程度の休憩時間
+        $response->assertSee('1:00', false); // 1時間の休憩時間
     }
 }

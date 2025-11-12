@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DetailRequest;
 use App\Models\Attendance;
+use App\Models\CorrectionAttendance;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -64,19 +65,34 @@ class AdminController extends Controller
                 'work_date' => $date,
             ]);
             $rests = collect([]);
+            $correctionAttendance = null;
+            $displayData = $attendance;
         } else {
             // 既存の勤怠データを取得
             $attendance = Attendance::findOrFail($id);
             $user = $attendance->user;
             $date = $attendance->work_date->format('Y-m-d');
-            $rests = $attendance->rests;
+
+            // 未承認のcorrection_attendanceをチェック
+            $correctionAttendance = CorrectionAttendance::where('attendance_id', $attendance->id)
+                ->where('is_approved', false)
+                ->first();
+
+            // 表示するデータを決定
+            $displayData = $correctionAttendance ?? $attendance;
+
+            // 休憩データを取得
+            if ($correctionAttendance) {
+                $rests = $correctionAttendance->correctionRests;
+            } else {
+                $rests = $attendance->rests;
+            }
         }
 
         // 共通処理
         $dateObj = \Carbon\Carbon::parse($date);
-        $displayData = $attendance;
 
-        return view('admin.attendance.detail', compact('user', 'dateObj', 'displayData', 'rests', 'attendance'));
+        return view('admin.attendance.detail', compact('user', 'dateObj', 'displayData', 'rests', 'attendance', 'correctionAttendance'));
     }
 
     /**
@@ -103,12 +119,25 @@ class AdminController extends Controller
             // 既存の勤怠データを更新
             $attendance = Attendance::findOrFail($id);
             $date = $attendance->work_date->format('Y-m-d');
+
+            // 勤怠データを更新
             $attendance->update([
                 'start_time' => $date . ' ' . $request->input('start_time'),
                 'end_time' => $date . ' ' . $request->input('end_time'),
             ]);
+
             // 既存の休憩データを削除
             $attendance->rests()->delete();
+
+            // 修正後のデータを承認済み申請として記録
+            $correctionAttendance = CorrectionAttendance::create([
+                'attendance_id' => $attendance->id,
+                'start_time' => $date . ' ' . $request->input('start_time'),
+                'end_time' => $date . ' ' . $request->input('end_time'),
+                'reason' => $request->input('reason'),
+                'is_approved' => true,
+            ]);
+
             $message = '勤怠データを更新しました。';
         }
 
@@ -121,6 +150,19 @@ class AdminController extends Controller
                     'start_time' => $date . ' ' . $rest['start'],
                     'end_time' => $date . ' ' . $rest['end'],
                 ]);
+            }
+        }
+
+        // 既存データを更新した場合は、修正後の休憩データも承認済み申請として記録
+        if ($id !== 'new' && isset($correctionAttendance)) {
+            foreach ($rests as $rest) {
+                if (!empty($rest['start']) && !empty($rest['end'])) {
+                    \App\Models\CorrectionRest::create([
+                        'correction_attendance_id' => $correctionAttendance->id,
+                        'start_time' => $date . ' ' . $rest['start'],
+                        'end_time' => $date . ' ' . $rest['end'],
+                    ]);
+                }
             }
         }
 

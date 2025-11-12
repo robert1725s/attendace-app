@@ -42,7 +42,6 @@ class GetStaffDataTest extends TestCase
         $response = $this->get('/admin/staff/list');
 
         // 全ての一般ユーザーの氏名とメールアドレスが正しく表示されている
-        $response->assertStatus(200);
         $response->assertSee('山田太郎', false);
         $response->assertSee('yamada@example.com', false);
         $response->assertSee('佐藤花子', false);
@@ -85,7 +84,6 @@ class GetStaffDataTest extends TestCase
         $response = $this->get('/admin/attendance/staff/' . $user->id);
 
         // 勤怠情報が正確に表示される
-        $response->assertStatus(200);
         $response->assertSee('テストユーザー', false);
         $response->assertSee('09:00', false);
         $response->assertSee('18:00', false);

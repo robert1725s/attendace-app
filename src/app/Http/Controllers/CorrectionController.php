@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attendance;
 use App\Models\CorrectionAttendance;
 use App\Models\Rest;
 use Illuminate\Support\Facades\Auth;

@@ -21,14 +21,15 @@
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 80px;
-    width: 900px;
+    max-width: 900px;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* テーブル */
 .index__table {
-    width: 900px;
+    width: 100%;
     margin: 0 auto;
     font-size: 16px;
     letter-spacing: 0.15em;
@@ -60,7 +61,7 @@
 .index__table-header:first-child,
 .index__table-cell:first-child {
     width: 300px;
-    padding-left: 170px;
+    padding-left: 120px;
 }
 
 .index__table-cell:last-child,
@@ -86,10 +87,40 @@
 }
 
 /* レスポンシブデザイン */
+/* 中型画面用（1399px以下） */
+@media (max-width: 1399px) {
+    .index__container {
+        padding: 0 15px;
+    }
+
+    .index__title {
+        font-size: 28px;
+        margin: 70px 0 55px;
+    }
+
+    .index__table-wrapper {
+        max-width: 100%;
+    }
+
+    .index__table {
+        font-size: 15px;
+    }
+
+    .index__table-header:first-child,
+    .index__table-cell:first-child {
+        padding-left: 80px;
+    }
+
+    .index__table-cell:last-child,
+    .index__table-header:last-child {
+        padding-right: 80px;
+    }
+}
+
+/* タブレット用（850px以下） */
 @media (max-width: 850px) {
     .index__container {
-        max-width: 100%;
-        padding: 15px;
+        padding: 0 15px;
     }
 
     .index__title {
@@ -102,60 +133,32 @@
     .index__table-wrapper {
         overflow-x: auto;
         margin-bottom: 40px;
-        width: 100%;
     }
 
     .index__table {
-        min-width: 700px;
-        width: 700px;
+        min-width: 600px;
         font-size: 14px;
     }
 
-    .index__table-header {
-        padding: 12px 10px;
-    }
-
-    .index__table-header:nth-child(1) {
-        width: 150px;
-    }
-
-    .index__table-header:nth-child(2) {
-        width: 250px;
-    }
-
-    .index__table-header:nth-child(3) {
-        width: 150px;
-    }
-
-    .index__table-header:first-child {
-        padding-left: 50px;
-    }
-
-    .index__table-header:last-child {
-        padding-right: 50px;
-    }
-
+    .index__table-header,
     .index__table-cell {
-        padding: 12px 10px;
+        padding: 12px 8px;
     }
 
-    .index__table-cell:nth-child(1) {
-        width: 150px;
+    .index__table-header:first-child,
+    .index__table-cell:first-child {
+        width: 200px;
+        padding-left: 20px;
     }
 
+    .index__table-header:nth-child(2),
     .index__table-cell:nth-child(2) {
         width: 250px;
     }
 
-    .index__table-cell:nth-child(3) {
-        width: 150px;
-    }
-
-    .index__table-cell:first-child {
-        padding-left: 50px;
-    }
-
+    .index__table-header:last-child,
     .index__table-cell:last-child {
-        padding-right: 50px;
+        width: 150px;
+        padding-right: 20px;
     }
 }

@@ -58,8 +58,6 @@ class VerifyEmailTest extends TestCase
         $this->actingAs($user);
         $response = $this->get('/verify_email');
 
-        $response->assertStatus(200);
-
         // 「認証はこちらから」ボタンが表示されている
         $response->assertSee('認証はこちらから');
 

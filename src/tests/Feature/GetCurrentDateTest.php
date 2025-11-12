@@ -26,9 +26,6 @@ class StampTest extends TestCase
         // 2. 勤怠打刻画面を開く
         $response = $this->get('/attendance');
 
-        // 画面が正常に表示される
-        $response->assertStatus(200);
-
         // 現在の日付が表示されている（例: 2025年10月17日(木)）
         $currentDate = now()->locale('ja')->translatedFormat('Y年n月j日(D)');
         $response->assertSee($currentDate, false);

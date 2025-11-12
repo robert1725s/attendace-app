@@ -46,7 +46,22 @@
     font-family: inherit;
 }
 
-/* タブレット用（768px以下） */
+/* 中型画面用（1399px以下） */
+@media screen and (max-width: 1399px) {
+    .header__logo {
+        width: 300px;
+    }
+
+    .header__nav {
+        gap: 20px;
+    }
+
+    .header__nav-link {
+        font-size: 20px;
+    }
+}
+
+/* タブレット用（850px以下） */
 @media screen and (max-width: 850px) {
     .header__container {
         padding: 20px 20px;

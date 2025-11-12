@@ -38,8 +38,14 @@ class DetailRequest extends FormRequest
                 'required',
                 'date_format:H:i',
                 function ($attribute, $value, $fail) {
+                    // start_timeでメッセージを出す場合は、スキップする
+                    $endTime = $this->input('end_time');
+                    if ($endTime && $value >= $endTime) {
+                        return;
+                    }
+
                     $startTime = $this->input('start_time');
-                    if ($startTime && $value <= $startTime) {
+                    if ($value <= $startTime) {
                         $fail('出勤時間もしくは退勤時間が不適切な値です');
                     }
                 },
@@ -150,9 +156,9 @@ class DetailRequest extends FormRequest
     public function messages()
     {
         return [
-            'start_time.required' => '出勤時間を記入してください。',
-            'end_time.required' => '退勤時間を記入してください。',
-            'reason.required' => '備考を記入してください。',
+            'start_time.required' => '出勤時間を記入してください',
+            'end_time.required' => '退勤時間を記入してください',
+            'reason.required' => '備考を記入してください',
         ];
     }
 }

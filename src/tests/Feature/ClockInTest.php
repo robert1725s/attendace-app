@@ -21,15 +21,14 @@ class ClockInTest extends TestCase
     public function test_clock_in_button_works_correctly()
     {
         // 1. ステータスが勤務外のユーザーにログインする
-        $user = $this->createVerifiedUser();
-        $this->actingAs($user);
+        $this->loginAsUser();
 
         // 2. 画面に「出勤」ボタンが表示されていることを確認する
         $response = $this->get('/attendance');
         $response->assertSee('出勤', false);
 
         // 3. 出勤の処理を行う
-        $response = $this->post('/attendance/stamp');
+        $response = $this->from('/attendance')->post('/attendance/stamp');
 
         // リダイレクトされる
         $response->assertRedirect('/attendance');
@@ -66,8 +65,7 @@ class ClockInTest extends TestCase
     public function test_clock_in_time_is_displayed_on_list_page()
     {
         // 1. ステータスが勤務外のユーザーにログインする
-        $user = $this->createVerifiedUser();
-        $this->actingAs($user);
+        $this->loginAsUser();
 
         // 2. 出勤の処理を行う
         $clockInTime = now();

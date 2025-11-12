@@ -73,7 +73,7 @@ class GetAdminAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細ページを開く
-        $this->get('/admin/attendance/' . $attendance->id);
+        $response = $this->get('/admin/attendance/' . $attendance->id);
 
         // 3. 出勤時間を退勤時間より後に設定する
         // 4. 保存処理をする
@@ -85,8 +85,9 @@ class GetAdminAttendanceDetailTest extends TestCase
             ]);
 
         // 「出勤時間もしくは退勤時間が不適切な値です」というバリデーションメッセージが表示される
-        $errors = session('errors');
-        $this->assertStringContainsString('出勤時間もしくは退勤時間が不適切な値です', $errors->first('start_time'));
+        $response->assertSessionHasErrors([
+            'start_time' => '出勤時間もしくは退勤時間が不適切な値です'
+        ]);
     }
 
     /**
@@ -115,7 +116,7 @@ class GetAdminAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細ページを開く
-        $this->get('/admin/attendance/' . $attendance->id);
+        $response = $this->get('/admin/attendance/' . $attendance->id);
 
         // 3. 休憩開始時間を退勤時間より後に設定する
         // 4. 保存処理をする
@@ -130,8 +131,9 @@ class GetAdminAttendanceDetailTest extends TestCase
             ]);
 
         // 「休憩時間が不適切な値です」というバリデーションメッセージが表示される
-        $errors = session('errors');
-        $this->assertStringContainsString('休憩時間が不適切な値です', $errors->first('rest.0.start'));
+        $response->assertSessionHasErrors([
+            'rest.0.start' => '休憩時間が不適切な値です'
+        ]);
     }
 
     /**
@@ -160,7 +162,7 @@ class GetAdminAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細ページを開く
-        $this->get('/admin/attendance/' . $attendance->id);
+        $response = $this->get('/admin/attendance/' . $attendance->id);
 
         // 3. 休憩終了時間を退勤時間より後に設定する
         // 4. 保存処理をする
@@ -175,8 +177,9 @@ class GetAdminAttendanceDetailTest extends TestCase
             ]);
 
         // 「休憩時間もしくは退勤時間が不適切な値です」というバリデーションメッセージが表示される
-        $errors = session('errors');
-        $this->assertStringContainsString('休憩時間もしくは退勤時間が不適切な値です', $errors->first('rest.0.end'));
+        $response->assertSessionHasErrors([
+            'rest.0.end' => '休憩時間もしくは退勤時間が不適切な値です'
+        ]);
     }
 
     /**
@@ -204,7 +207,7 @@ class GetAdminAttendanceDetailTest extends TestCase
         ]);
 
         // 2. 勤怠詳細ページを開く
-        $this->get('/admin/attendance/' . $attendance->id);
+        $response = $this->get('/admin/attendance/' . $attendance->id);
 
         // 3. 備考欄を未入力のまま保存処理をする
         $response = $this->from('/admin/attendance/' . $attendance->id)
@@ -215,7 +218,8 @@ class GetAdminAttendanceDetailTest extends TestCase
             ]);
 
         // 「備考を記入してください」というバリデーションメッセージが表示される
-        $errors = session('errors');
-        $this->assertStringContainsString('備考を記入してください', $errors->first('reason'));
+        $response->assertSessionHasErrors([
+            'reason' => '備考を記入してください'
+        ]);
     }
 }

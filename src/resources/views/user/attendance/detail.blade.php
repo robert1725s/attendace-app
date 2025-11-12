@@ -9,6 +9,13 @@
         <!-- タイトル -->
         <h1 class="detail__title">勤怠詳細</h1>
 
+        <!-- 成功メッセージ -->
+        @if (session('success'))
+            <div class="detail__success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <form action="/attendance/detail/request/{{ $attendance?->id ?? 'new' }}" method="POST">
             @csrf
             <input type="hidden" name="date" value="{{ $dateObj->format('Y-m-d') }}">
@@ -93,7 +100,7 @@
                         </div>
                     @endforeach
                 @else
-                    @for ($i = 0; $i < max(2, $rests->count()); $i++)
+                    @for ($i = 0; $i < $rests->count() + 1; $i++)
                         <div class="detail__row">
                             <div class="detail__label">休憩{{ $i === 0 ? '' : $i + 1 }}</div>
                             <div class="detail__value">

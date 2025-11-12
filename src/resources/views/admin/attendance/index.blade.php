@@ -57,6 +57,8 @@
                             <td class="index__table-cell">
                                 @if($userAttendance['attendance'])
                                     <a href="{{ url('/admin/attendance/' . $userAttendance['attendance']->id) }}" class="index__detail-link">詳細</a>
+                                @else
+                                    <a href="{{ url('/admin/attendance/new?date=' . $targetDate->format('Y-m-d') . '&user_id=' . $userAttendance['user']->id) }}" class="index__detail-link">詳細</a>
                                 @endif
                             </td>
                         </tr>

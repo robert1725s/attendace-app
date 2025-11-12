@@ -53,11 +53,17 @@ class GetAdminAttendanceListTest extends TestCase
             'end_time' => $today->copy()->setTime(19, 0, 0),
         ]);
 
+        // 休憩時間を追加
+        Rest::create([
+            'attendance_id' => $attendance2->id,
+            'start_time' => $today->copy()->setTime(12, 0, 0),
+            'end_time' => $today->copy()->setTime(13, 0, 0),
+        ]);
+
         // 2. 勤怠一覧画面を開く
         $response = $this->get('/admin/attendances/list');
 
         // その日の全ユーザーの勤怠情報が正確な値になっている
-        $response->assertStatus(200);
         $response->assertSee('テストユーザー1', false);
         $response->assertSee('テストユーザー2', false);
         $response->assertSee('09:00', false);
@@ -119,7 +125,7 @@ class GetAdminAttendanceListTest extends TestCase
         $this->get('/admin/attendances/list');
 
         // 3. 「前日」ボタンを押す
-        $response = $this->get('/admin/attendances/list?date=' . $yesterday->format('Y-m-d'));
+        $response = $this->from('/admin/attendances/list')->get('/admin/attendances/list?date=' . $yesterday->format('Y-m-d'));
 
         // 前日の日付の勤怠情報が表示される
         $response->assertSee($yesterday->format('Y年n月j日'), false);
@@ -158,7 +164,7 @@ class GetAdminAttendanceListTest extends TestCase
         $this->get('/admin/attendances/list');
 
         // 3. 「翌日」ボタンを押す
-        $response = $this->get('/admin/attendances/list?date=' . $tomorrow->format('Y-m-d'));
+        $response = $this->from('/admin/attendances/list')->get('/admin/attendances/list?date=' . $tomorrow->format('Y-m-d'));
 
         // 翌日の日付の勤怠情報が表示される
         $response->assertSee($tomorrow->format('Y年n月j日'), false);

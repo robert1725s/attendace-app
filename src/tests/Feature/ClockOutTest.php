@@ -29,7 +29,7 @@ class ClockOutTest extends TestCase
         $response->assertSee('退勤', false);
 
         // 3. 退勤の処理を行う
-        $response = $this->post('/attendance/stamp');
+        $response = $this->from('/attendance')->post('/attendance/stamp');
 
         // リダイレクトされる
         $response->assertRedirect('/attendance');

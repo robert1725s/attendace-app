@@ -21,8 +21,7 @@ class StatusTest extends TestCase
     public function test_status_is_displayed_as_off_work()
     {
         // 1. ステータスが勤務外のユーザーにログインする
-        $user = $this->createVerifiedUser();
-        $this->actingAs($user);
+        $this->loginAsUser();
 
         // 2. 勤怠打刻画面を開く
         $response = $this->get('/attendance');

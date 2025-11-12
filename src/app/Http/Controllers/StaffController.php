@@ -7,7 +7,6 @@ use App\Models\Attendance;
 use App\Models\CorrectionAttendance;
 use App\Models\CorrectionRest;
 use App\Models\Rest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class StaffController extends Controller

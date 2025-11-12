@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody class="index__table-body">
-                    @forelse($staffs as $staff)
+                    @foreach($staffs as $staff)
                         <tr class="index__table-row">
                             <td class="index__table-cell">{{ $staff->name }}</td>
                             <td class="index__table-cell">{{ $staff->email }}</td>
@@ -28,12 +28,7 @@
                                 <a href="{{ url('/admin/attendance/staff/' . $staff->id) }}" class="index__detail-link">詳細</a>
                             </td>
                         </tr>
-                    @empty
-                        <tr class="index__table-row">
-                            <td class="index__table-cell index__table-cell--empty" colspan="3">
-                                スタッフがいません</td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
         </div>

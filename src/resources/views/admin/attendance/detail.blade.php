@@ -9,6 +9,13 @@
         <!-- タイトル -->
         <h1 class="detail__title">勤怠詳細</h1>
 
+        <!-- 成功メッセージ -->
+        @if (session('success'))
+            <div class="detail__success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <form action="/admin/attendance/modify/{{ $attendance->id ?? 'new?date=' . $dateObj->format('Y-m-d') . '&user_id=' . $user->id }}" method="POST">
             @csrf
 
@@ -38,15 +45,27 @@
                     <div class="detail__label">出勤・退勤</div>
                     <div class="detail__value">
                         <div class="detail__time-range">
-                            <input type="time" name="start_time"
-                                value="{{ old('start_time', $displayData?->start_time?->format('H:i')) }}"
-                                class="detail__time-input {{ old('start_time', $displayData?->start_time) ? 'has-value' : 'is-empty' }}">
+                            @if ($correctionAttendance)
+                                <div class="detail__time-box">
+                                    {{ $displayData?->start_time?->format('H:i') }}
+                                </div>
+                            @else
+                                <input type="time" name="start_time"
+                                    value="{{ old('start_time', $displayData?->start_time?->format('H:i')) }}"
+                                    class="detail__time-input {{ old('start_time', $displayData?->start_time) ? 'has-value' : 'is-empty' }}">
+                            @endif
 
                             <span class="detail__time-separator">〜</span>
 
-                            <input type="time" name="end_time"
-                                value="{{ old('end_time', $displayData?->end_time?->format('H:i')) }}"
-                                class="detail__time-input {{ old('end_time', $displayData?->end_time) ? 'has-value' : 'is-empty' }}">
+                            @if ($correctionAttendance)
+                                <div class="detail__time-box">
+                                    {{ $displayData?->end_time?->format('H:i') }}
+                                </div>
+                            @else
+                                <input type="time" name="end_time"
+                                    value="{{ old('end_time', $displayData?->end_time?->format('H:i')) }}"
+                                    class="detail__time-input {{ old('end_time', $displayData?->end_time) ? 'has-value' : 'is-empty' }}">
+                            @endif
                         </div>
                         @error('start_time')
                             <div class="detail__error">{{ $message }}</div>
@@ -58,36 +77,61 @@
                 </div>
 
                 <!-- 休憩 -->
-                @for ($i = 0; $i < max(2, $rests->count()); $i++)
-                    <div class="detail__row">
-                        <div class="detail__label">休憩{{ $i === 0 ? '' : $i + 1 }}</div>
-                        <div class="detail__value">
-                            <div class="detail__time-range">
-                                <input type="time" name="rest[{{ $i }}][start]"
-                                    value="{{ old("rest.{$i}.start", $rests->get($i)?->start_time?->format('H:i')) }}"
-                                    class="detail__time-input {{ old("rest.{$i}.start", $rests->get($i)?->start_time) ? 'has-value' : 'is-empty' }}">
+                @if ($correctionAttendance)
+                    @foreach ($rests as $index => $rest)
+                        <div class="detail__row">
+                            <div class="detail__label">休憩{{ $index === 0 ? '' : $index + 1 }}</div>
+                            <div class="detail__value">
+                                <div class="detail__time-range">
+                                    <div class="detail__time-box">
+                                        {{ $rest->start_time?->format('H:i') }}
+                                    </div>
 
-                                <span class="detail__time-separator">〜</span>
+                                    <span class="detail__time-separator">〜</span>
 
-                                <input type="time" name="rest[{{ $i }}][end]"
-                                    value="{{ old("rest.{$i}.end", $rests->get($i)?->end_time?->format('H:i')) }}"
-                                    class="detail__time-input {{ old("rest.{$i}.end", $rests->get($i)?->end_time) ? 'has-value' : 'is-empty' }}">
+                                    <div class="detail__time-box">
+                                        {{ $rest->end_time?->format('H:i') }}
+                                    </div>
+                                </div>
                             </div>
-                            @error("rest.{$i}.start")
-                                <div class="detail__error">{{ $message }}</div>
-                            @enderror
-                            @error("rest.{$i}.end")
-                                <div class="detail__error">{{ $message }}</div>
-                            @enderror
                         </div>
-                    </div>
-                @endfor
+                    @endforeach
+                @else
+                    @for ($i = 0; $i < $rests->count() + 1; $i++)
+                        <div class="detail__row">
+                            <div class="detail__label">休憩{{ $i === 0 ? '' : $i + 1 }}</div>
+                            <div class="detail__value">
+                                <div class="detail__time-range">
+                                    <input type="time" name="rest[{{ $i }}][start]"
+                                        value="{{ old("rest.{$i}.start", $rests->get($i)?->start_time?->format('H:i')) }}"
+                                        class="detail__time-input {{ old("rest.{$i}.start", $rests->get($i)?->start_time) ? 'has-value' : 'is-empty' }}">
+
+                                    <span class="detail__time-separator">〜</span>
+
+                                    <input type="time" name="rest[{{ $i }}][end]"
+                                        value="{{ old("rest.{$i}.end", $rests->get($i)?->end_time?->format('H:i')) }}"
+                                        class="detail__time-input {{ old("rest.{$i}.end", $rests->get($i)?->end_time) ? 'has-value' : 'is-empty' }}">
+                                </div>
+                                @error("rest.{$i}.start")
+                                    <div class="detail__error">{{ $message }}</div>
+                                @enderror
+                                @error("rest.{$i}.end")
+                                    <div class="detail__error">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    @endfor
+                @endif
 
                 <!-- 備考 -->
                 <div class="detail__row">
                     <div class="detail__label">備考</div>
                     <div class="detail__value">
-                        <textarea name="reason" class="detail__note-input">{{ old('reason') }}</textarea>
+                        @if ($correctionAttendance)
+                            <div class="detail__note-box">{{ $correctionAttendance->reason }}</div>
+                        @else
+                            <textarea name="reason" class="detail__note-input">{{ old('reason') }}</textarea>
+                        @endif
                         @error('reason')
                             <div class="detail__error">{{ $message }}</div>
                         @enderror
@@ -95,9 +139,13 @@
                 </div>
             </div>
 
-            <!-- 修正ボタン -->
+            <!-- 修正ボタン or 承認待ちメッセージ -->
             <div class="detail__button-wrapper">
-                <button type="submit" class="detail__button">修正</button>
+                @if ($correctionAttendance)
+                    <p class="detail__pending-message">*承認待ちのため修正はできません。</p>
+                @else
+                    <button type="submit" class="detail__button">修正</button>
+                @endif
             </div>
         </form>
     </div>
